@@ -1,0 +1,8 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: Le répertoire intermédiaire (Release\) contient des fichiers partagés provenant d'un autre projet (evil.dll.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
+  dllmain.cpp
+  Génération de code en cours
+  Previous IPDB not found, fall back to full compilation.
+  All 5 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+C:\Users\ANSSI\Desktop\Workspace\Code\evil.dll\evil.dll\dllmain.cpp(32): warning C4715: 'RegisterDLLWindowClass' : les chemins de contrôle ne retournent pas tous une valeur
+  Fin de la génération du code
+  evil.dll.vcxproj -> C:\Users\ANSSI\Desktop\Workspace\Code\evil.dll\Release\evil.dll
