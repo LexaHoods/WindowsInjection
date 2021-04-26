@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
         exit(-1);
     }
 
-    /* STEP 0 : Search pid of processus target */
+    /* STEP 0 : Search pid of target process */
 
     fprintf(stderr, " **** Searching PID for the processus : %s ****\n", argv[1]);
 
