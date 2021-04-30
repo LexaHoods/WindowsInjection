@@ -1,5 +1,7 @@
 .vs/
-
+Code/ShellCode/.vs/
+Code/[Tech] InjectionDLL/injectDll/.vs/
+Code/[Tech] InjectionDLL/evil.dll/.vs/
 *_i.c
 *_p.c
 *_h.h
