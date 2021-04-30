@@ -1,0 +1,224 @@
+Opened log file 'C:\Temp\[DI]MessageBox.log'
+0: kd> .reload 
+.reload 
+Connected to Windows 10 19041 x64 target at (Fri Apr 30 12:07:20.260 2021 (UTC + 2:00)), ptr64 TRUE
+SYMSRV:  BYINDEX: 0xCD
+         C:\ProgramData\Dbg\sym
+         ntkrnlmp.pdb
+         769C521E4833ECF72E21F02BF33691A51
+SYMSRV:  PATH: C:\ProgramData\Dbg\sym\ntkrnlmp.pdb\769C521E4833ECF72E21F02BF33691A51\ntkrnlmp.pdb
+SYMSRV:  RESULT: 0x00000000
+DBGHELP: nt - public symbols  
+        C:\ProgramData\Dbg\sym\ntkrnlmp.pdb\769C521E4833ECF72E21F02BF33691A51\ntkrnlmp.pdb
+Loading Kernel Symbols
+...............................................
+
+Press ctrl-c (cdb, kd, ntsd) or ctrl-break (windbg) to abort symbol loads that take too long.
+Run !sym noisy before .reload to track down problems loading symbols.
+
+................
+................................................................
+................................................
+Loading User Symbols
+
+Loading unloaded module list
+................Unable to enumerate user-mode unloaded modules, Win32 error 0n30
+
+************* Symbol Loading Error Summary **************
+Module name            Error
+SharedUserData         No error - symbol load deferred
+				Symbol loading has been deferred because this symbol is not needed
+				at this time. Use reload /f to force load symbols.
+
+0: kd> !process 0 0 notepad.exe
+!process 0 0 notepad.exe
+PROCESS ffffe78e2add0080
+    SessionId: 2  Cid: 14cc    Peb: 7d36388000  ParentCid: 1214
+    DirBase: 2fff9000  ObjectTable: ffffbb8f9194d740  HandleCount: 237.
+    Image: notepad.exe
+
+0: kd> .process ffffe78e2add0080
+.process ffffe78e2add0080
+Implicit process is now ffffe78e`2add0080
+WARNING: .cache forcedecodeuser is not enabled
+0: kd> .reload
+.reload
+Connected to Windows 10 19041 x64 target at (Fri Apr 30 12:09:20.607 2021 (UTC + 2:00)), ptr64 TRUE
+SYMSRV:  BYINDEX: 0xCE
+         C:\ProgramData\Dbg\sym
+         ntkrnlmp.pdb
+         769C521E4833ECF72E21F02BF33691A51
+SYMSRV:  PATH: C:\ProgramData\Dbg\sym\ntkrnlmp.pdb\769C521E4833ECF72E21F02BF33691A51\ntkrnlmp.pdb
+SYMSRV:  RESULT: 0x00000000
+DBGHELP: nt - public symbols  
+        C:\ProgramData\Dbg\sym\ntkrnlmp.pdb\769C521E4833ECF72E21F02BF33691A51\ntkrnlmp.pdb
+Loading Kernel Symbols
+...............................................
+
+Press ctrl-c (cdb, kd, ntsd) or ctrl-break (windbg) to abort symbol loads that take too long.
+Run !sym noisy before .reload to track down problems loading symbols.
+
+................
+................................................................
+................................................
+Loading User Symbols
+..............................
+
+Press ctrl-c (cdb, kd, ntsd) or ctrl-break (windbg) to abort symbol loads that take too long.
+Run !sym noisy before .reload to track down problems loading symbols.
+
+..........
+Loading unloaded module list
+................
+
+************* Symbol Loading Error Summary **************
+Module name            Error
+SharedUserData         No error - symbol load deferred
+				Symbol loading has been deferred because this symbol is not needed
+				at this time. Use reload /f to force load symbols.
+
+0: kd> sxe ld user32.dll
+sxe ld user32.dll
+0: kd> x user32!MessageBox*
+x user32!MessageBox*
+SYMSRV:  BYINDEX: 0xCF
+         C:\ProgramData\Dbg\sym
+         USER32.dll
+         EFA6B3271a0000
+SYMSRV:  PATH: C:\ProgramData\Dbg\sym\USER32.dll\EFA6B3271a0000\USER32.dll
+SYMSRV:  RESULT: 0x00000000
+DBGHELP: C:\ProgramData\Dbg\sym\USER32.dll\EFA6B3271a0000\USER32.dll - OK
+DBGENG:  Partial symbol load found image C:\ProgramData\Dbg\sym\USER32.dll\EFA6B3271a0000\USER32.dll.
+SYMSRV:  BYINDEX: 0xD0
+         C:\ProgramData\Dbg\sym
+         user32.pdb
+         B943CB2722DA137860020BC41599A58B1
+SYMSRV:  PATH: C:\ProgramData\Dbg\sym\user32.pdb\B943CB2722DA137860020BC41599A58B1\user32.pdb
+SYMSRV:  RESULT: 0x00000000
+DBGHELP: USER32 - public symbols  
+        C:\ProgramData\Dbg\sym\user32.pdb\B943CB2722DA137860020BC41599A58B1\user32.pdb
+00007ff8`a5e4b0d0 USER32!MessageBoxTimeoutW (MessageBoxTimeoutW)
+00007ff8`a5e4a144 USER32!MessageBoxWorker (int __cdecl MessageBoxWorker(struct _MSGBOXDATA *))
+00007ff8`a5e4af60 USER32!MessageBoxTimeoutA (MessageBoxTimeoutA)
+00007ff8`a5e4acf0 USER32!MessageBoxIndirectA (MessageBoxIndirectA)
+00007ff8`a5e4aea0 USER32!MessageBoxIndirectW (MessageBoxIndirectW)
+00007ff8`a5e4acc0 USER32!MessageBoxExW (MessageBoxExW)
+00007ff8`a5e4ac90 USER32!MessageBoxExA (MessageBoxExA)
+00007ff8`a5e4b2b0 USER32!MessageBoxW (MessageBoxW)
+00007ff8`a5e4ac30 USER32!MessageBoxA (MessageBoxA)
+0: kd> ba e1 00007ff8`a5e4ac30
+ba e1 00007ff8`a5e4ac30
+0: kd> ba e1 00007ff8`a5e4b2b0
+ba e1 00007ff8`a5e4b2b0
+0: kd> g
+g
+Breakpoint 0 hit
+SYMSRV:  BYINDEX: 0xD1
+         C:\ProgramData\Dbg\sym
+         ntdll.pdb
+         21A98F2D1A7574D87D399428C4AAB0DC1
+SYMSRV:  PATH: C:\ProgramData\Dbg\sym\ntdll.pdb\21A98F2D1A7574D87D399428C4AAB0DC1\ntdll.pdb
+SYMSRV:  RESULT: 0x00000000
+DBGHELP: ntdll - public symbols  
+        C:\ProgramData\Dbg\sym\ntdll.pdb\21A98F2D1A7574D87D399428C4AAB0DC1\ntdll.pdb
+USER32!MessageBoxA:
+0033:00007ff8`a5e4ac30 ??              ???
+1: kd> bl
+bl
+     0 e Disable Clear  00007ff8`a5e4ac30 e 1 0001 (0001) USER32!MessageBoxA
+     1 e Disable Clear  00007ff8`a5e4b2b0 e 1 0001 (0001) USER32!MessageBoxW
+
+1: kd> kv
+kv
+ # Child-SP          RetAddr               : Args to Child                                                           : Call Site
+00 0000007d`364ff6c8 00007ff8`98911061     : 00000000`7ffe0300 00007ff8`989111ac 00000000`7ffe0300 0000007d`364ffa78 : USER32!MessageBoxA
+01 0000007d`364ff6d0 00000000`7ffe0300     : 00007ff8`989111ac 00000000`7ffe0300 0000007d`364ffa78 00000000`00000000 : 0x00007ff8`98911061
+02 0000007d`364ff6d8 00007ff8`989111ac     : 00000000`7ffe0300 0000007d`364ffa78 00000000`00000000 00000000`00000000 : SharedUserData+0x300
+03 0000007d`364ff6e0 00000000`7ffe0300     : 0000007d`364ffa78 00000000`00000000 00000000`00000000 00007ff8`98910000 : 0x00007ff8`989111ac
+04 0000007d`364ff6e8 0000007d`364ffa78     : 00000000`00000000 00000000`00000000 00007ff8`98910000 00007ff8`9891131f : SharedUserData+0x300
+05 0000007d`364ff6f0 00000000`00000000     : 00000000`00000000 00007ff8`98910000 00007ff8`9891131f 00000000`7ffe0385 : 0x0000007d`364ffa78
+1: kd> u 00007ff8`98911061
+u 00007ff8`98911061
+00007ff8`98911061 b801000000      mov     eax,1
+00007ff8`98911066 4883c438        add     rsp,38h
+00007ff8`9891106a c3              ret
+00007ff8`9891106b cc              int     3
+00007ff8`9891106c cc              int     3
+00007ff8`9891106d cc              int     3
+00007ff8`9891106e cc              int     3
+00007ff8`9891106f cc              int     3
+1: kd> u 00007ff8`98911061-10 L20
+u 00007ff8`98911061-10 L20
+00007ff8`98911051 00488d          add     byte ptr [rax-73h],cl
+00007ff8`98911054 1567110000      adc     eax,1167h
+00007ff8`98911059 33c9            xor     ecx,ecx
+00007ff8`9891105b ff151f100000    call    qword ptr [00007ff8`98912080]
+00007ff8`98911061 b801000000      mov     eax,1
+00007ff8`98911066 4883c438        add     rsp,38h
+00007ff8`9891106a c3              ret
+00007ff8`9891106b cc              int     3
+00007ff8`9891106c cc              int     3
+00007ff8`9891106d cc              int     3
+00007ff8`9891106e cc              int     3
+00007ff8`9891106f cc              int     3
+00007ff8`98911070 cc              int     3
+00007ff8`98911071 cc              int     3
+00007ff8`98911072 cc              int     3
+00007ff8`98911073 cc              int     3
+00007ff8`98911074 cc              int     3
+00007ff8`98911075 cc              int     3
+00007ff8`98911076 66660f1f840000000000 nop word ptr [rax+rax]
+00007ff8`98911080 483b0d811f0000  cmp     rcx,qword ptr [00007ff8`98913008]
+00007ff8`98911087 f27512          bnd jne 00007ff8`9891109c
+00007ff8`9891108a 48c1c110        rol     rcx,10h
+00007ff8`9891108e 66f7c1ffff      test    cx,0FFFFh
+00007ff8`98911093 f27502          bnd jne 00007ff8`98911098
+00007ff8`98911096 f2c3            bnd ret
+00007ff8`98911098 48c1c910        ror     rcx,10h
+00007ff8`9891109c e997030000      jmp     00007ff8`98911438
+00007ff8`989110a1 cc              int     3
+00007ff8`989110a2 cc              int     3
+00007ff8`989110a3 cc              int     3
+00007ff8`989110a4 4883ec28        sub     rsp,28h
+00007ff8`989110a8 85d2            test    edx,edx
+1: kd> dd 00007ff8`98912080 l1
+dd 00007ff8`98912080 l1
+00007ff8`98912080  a5e4ac30
+1: kd> r eip
+r eip
+eip=a5e4ac30
+1: kd> u 00007ff8`98911061-30 L10
+u 00007ff8`98911061-30 L10
+00007ff8`98911031 ff4889          dec     dword ptr [rax-77h]
+00007ff8`98911034 442428          and     al,28h
+00007ff8`98911037 4533c9          xor     r9d,r9d
+00007ff8`9891103a 33d2            xor     edx,edx
+00007ff8`9891103c 89442420        mov     dword ptr [rsp+20h],eax
+00007ff8`98911040 33c9            xor     ecx,ecx
+00007ff8`98911042 ff15b80f0000    call    qword ptr [00007ff8`98912000]
+00007ff8`98911048 4533c9          xor     r9d,r9d
+00007ff8`9891104b 4c8d053e110000  lea     r8,[00007ff8`98912190]
+00007ff8`98911052 488d1567110000  lea     rdx,[00007ff8`989121c0]
+00007ff8`98911059 33c9            xor     ecx,ecx
+00007ff8`9891105b ff151f100000    call    qword ptr [00007ff8`98912080]
+00007ff8`98911061 b801000000      mov     eax,1
+00007ff8`98911066 4883c438        add     rsp,38h
+00007ff8`9891106a c3              ret
+00007ff8`9891106b cc              int     3
+1: kd> da 00007ff8`98912190
+da 00007ff8`98912190
+00007ff8`98912190  "EvIlDLL"
+1: kd> da 00007ff8`989121c0
+da 00007ff8`989121c0
+00007ff8`989121c0  "Goodbye ! with pleasure"
+1: kd> !threads
+!threads
+Index	TID			TEB				StackBase			StackLimit			DeAlloc			StackSize			ThreadProc
+0	0000000000000000	0xffffe78e2ac7d080	0xffffe78e2ac7d088	0xffffe78e2ac7d088	0xffffffffffffffff	0x0000000000000000	0x200006ffffbb8f
+0	0000000000000000	0xffffe78e2ac7d080	0xffffe78e2ac7d088	0xffffe78e2ac7d088	0xffffffffffffffff	0x0000000000000000	0x200006ffffbb8f
+0	0000000000000000	0xffffe78e2ac7d080	0xffffe78e2ac7d088	0xffffe78e2ac7d088	0xffffffffffffffff	0x0000000000000000	0x200006ffffbb8f
+0	0000000000000000	0xffffe78e2ac7d080	0xffffe78e2ac7d088	0xffffe78e2ac7d088	0xffffffffffffffff	0x0000000000000000	0x200006ffffbb8f
+Total VM consumed by thread stacks 0x00000000
+3: kd> .logclose
+.logclose
+Closing open log file C:\Temp\[DI]MessageBox.log

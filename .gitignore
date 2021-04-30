@@ -22,7 +22,7 @@ Code/[Tech] InjectionDLL/evil.dll/.vs/
 *.tmp
 *.tmp_proj
 *_wpftmp.csproj
-*.log
+
 *.vspscc
 *.vssscc
 .builds
