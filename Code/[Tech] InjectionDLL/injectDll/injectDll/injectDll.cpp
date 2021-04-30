@@ -80,6 +80,7 @@ int main(int argc, char *argv[])
 
     WriteProcessMemory(processHandle, remoteBuffer, (LPVOID)dllPath, sizeof dllPath, NULL);
 
+
     HMODULE module = GetModuleHandle(TEXT("Kernel32"));
 
     if (module == 0) {

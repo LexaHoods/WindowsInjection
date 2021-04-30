@@ -4,7 +4,7 @@
 
 extern "C" void __declspec(dllexport) Show() {
     
-    MessageBox(NULL, L"Hello, You have Pwned ! I'm evil dll", L"EvIlDLL", MB_OK);
+    MessageBoxA(NULL, "Hello, You have Pwned ! I'm evil dll", "EvIlDLL", MB_OK);
 
 }
 
