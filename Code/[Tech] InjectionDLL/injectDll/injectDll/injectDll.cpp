@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
     fprintf(stderr, "**** Hello in Classic Dll Injection  ! **** \n");
     
-    //USAGE :  injectDll.exe <target.exe> <dllPath> or injectDll.exe <target.exe> <dllPath>
+    //USAGE :  injectDll.exe <target.exe>  or injectDll.exe <target.exe> <dllPath>
     
     if (argc == 1 || argc >=4 ) {
 
