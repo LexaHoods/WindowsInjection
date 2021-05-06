@@ -1,0 +1,7 @@
+﻿  injectDll.cpp
+C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech] InjectionDLL\injectDll\injectDll\injectDll.cpp(23,21): warning C4477: 'fprintf' : la chaîne de format '%s' nécessite un argument de type 'char *', mais l'argument variadique 1 est de type 'const std::string'
+  Previous IPDB not found, fall back to full compilation.
+  Génération de code en cours
+  All 196 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Fin de la génération du code
+  injectDll.vcxproj -> C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech] InjectionDLL\injectDll\x64\Release\injectDll.exe

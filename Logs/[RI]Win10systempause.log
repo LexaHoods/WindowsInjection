@@ -1,0 +1,1198 @@
+Opened log file 'C:\Temp\[RI]Win10systempause.log'
+0: kd> !process 0 0 notepad.exe
+!process 0 0 notepad.exe
+PROCESS ffff8907c7d3b340
+    SessionId: 2  Cid: 1b94    Peb: beb965d000  ParentCid: 11d0
+    DirBase: 054ea000  ObjectTable: ffffd801f9cf9cc0  HandleCount: 241.
+    Image: notepad.exe
+
+0: kd> .process /p ffff8907c7d3b340; !peb beb965d000
+.process /p ffff8907c7d3b340; !peb beb965d000
+Implicit process is now ffff8907`c7d3b340
+PEB at 000000beb965d000
+    InheritedAddressSpace:    No
+    ReadImageFileExecOptions: No
+    BeingDebugged:            No
+    ImageBaseAddress:         00007ff6e91f0000
+    NtGlobalFlag:             0
+    NtGlobalFlag2:            0
+    Ldr                       00007ff8d5e1a4c0
+    Ldr.Initialized:          Yes
+    Ldr.InInitializationOrderModuleList: 000002205f4924a0 . 000002205f4bb1f0
+    Ldr.InLoadOrderModuleList:           000002205f492610 . 000002205f4bb1d0
+    Ldr.InMemoryOrderModuleList:         000002205f492620 . 000002205f4bb1e0
+                    Base TimeStamp                     Module
+            7ff6e91f0000 86fcbd69 Oct 07 00:15:05 2041 C:\Windows\system32\notepad.exe
+            7ff8d5cb0000 9bed63d6 Nov 24 02:54:30 2052 C:\Windows\SYSTEM32\ntdll.dll
+            7ff8d5aa0000 61e69688 Jan 18 11:29:28 2022 C:\Windows\System32\KERNEL32.DLL
+            7ff8d33f0000 2f2f77bf Feb 01 12:59:59 1995 C:\Windows\System32\KERNELBASE.dll
+            7ff8d42c0000 a19db164 Dec 03 18:05:40 2055 C:\Windows\System32\GDI32.dll
+            7ff8d3b30000 0dcd0213 May 03 22:26:59 1977 C:\Windows\System32\win32u.dll
+            7ff8d3770000 f981a3e7 Aug 26 10:08:07 2102 C:\Windows\System32\gdi32full.dll
+            7ff8d3880000 39255ccf May 19 17:25:03 2000 C:\Windows\System32\msvcp_win.dll
+            7ff8d3c10000 2bd748bf Apr 23 03:39:11 1993 C:\Windows\System32\ucrtbase.dll
+            7ff8d58a0000 efa6b327 May 29 17:24:23 2097 C:\Windows\System32\USER32.dll
+            7ff8d3f60000 c94441ae Jan 01 03:27:58 2077 C:\Windows\System32\combase.dll
+            7ff8d43a0000 4c237b59 Jun 24 17:35:53 2010 C:\Windows\System32\RPCRT4.dll
+            7ff8d5bc0000 5e98fab6 Apr 17 02:39:18 2020 C:\Windows\System32\shcore.dll
+            7ff8d3d10000 564f9f39 Nov 20 23:31:21 2015 C:\Windows\System32\msvcrt.dll
+            7ff8c3a10000 7b4420c4 Jul 14 23:46:44 2035 C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.844_none_ca00b6081b84eb1d\COMCTL32.dll
+            7ff8d4b50000 3a0e9944 Nov 12 14:21:08 2000 C:\Windows\System32\IMM32.DLL
+            7ff8d3b90000 8fb0d55f May 24 01:27:27 2046 C:\Windows\System32\bcryptPrimitives.dll
+            7ff8d42f0000 15fd8d3b Sep 10 04:51:39 1981 C:\Windows\System32\ADVAPI32.dll
+            7ff8d4d30000 4782ccda Jan 08 02:07:38 2008 C:\Windows\System32\sechost.dll
+            7ff8d1330000 f0713fcd Oct 30 07:42:21 2097 C:\Windows\SYSTEM32\kernel.appcore.dll
+            7ff8d0e70000 e799fe58 Feb 16 14:23:36 2093 C:\Windows\system32\uxtheme.dll
+            7ff8d4e50000 db9f728a Oct 05 14:37:30 2086 C:\Windows\System32\clbcatq.dll
+            7ff8c7e60000 7b8127ab Aug 30 06:44:27 2035 C:\Windows\System32\MrmCoreR.dll
+            7ff8d50e0000 4ef6f5fe Dec 25 11:07:58 2011 C:\Windows\System32\SHELL32.dll
+            7ff8d1530000 469271ba Jul 09 19:34:50 2007 C:\Windows\SYSTEM32\windows.storage.dll
+            7ff8d2d90000 409dec87 May 09 10:32:07 2004 C:\Windows\system32\Wldp.dll
+            7ff8d5a40000 897a522a Feb 02 14:03:38 2043 C:\Windows\System32\shlwapi.dll
+            7ff8d4f00000 4d0cd080 Dec 18 16:17:20 2010 C:\Windows\System32\MSCTF.dll
+            7ff8d4a20000 f963cc3a Aug 03 18:52:10 2102 C:\Windows\System32\OLEAUT32.dll
+            7ff8c3d50000 f53222a7 May 11 09:26:31 2100 C:\Windows\system32\TextShaping.dll
+            7ff8b3820000 f8bdcb87 Mar 30 20:52:55 2102 C:\Windows\System32\efswrt.dll
+            7ff8be580000 baf5f9a3 May 25 06:40:03 2069 C:\Windows\System32\MPR.dll
+            7ff8cf3b0000 d901ef8c May 15 18:32:12 2085 C:\Windows\SYSTEM32\wintypes.dll
+            7ff8cdc90000 1d036f79 Jun 04 22:20:09 1985 C:\Windows\System32\twinapi.appcore.dll
+            7ff8bbde0000 24cdd509 Jul 26 17:13:13 1989 C:\Windows\System32\oleacc.dll
+            7ff8c5d60000 d951caad Jul 15 08:16:13 2085 C:\Windows\SYSTEM32\textinputframework.dll
+            7ff8d0a70000 d3dfbbe6 Aug 22 22:13:26 2082 C:\Windows\System32\CoreMessaging.dll
+            7ff8d0390000 ce358de3 Aug 18 22:30:27 2079 C:\Windows\System32\CoreUIComponents.dll
+            7ff8d4de0000 aff3315b Jul 18 04:18:03 2063 C:\Windows\System32\WS2_32.dll
+            7ff8d2130000 3d60ad04 Aug 19 10:32:04 2002 C:\Windows\SYSTEM32\ntmarta.dll
+            7ff8c29c0000 57bfd5ab Aug 26 07:37:47 2016 C:\Windows\system32\VCRUNTIME140.dll
+    SubSystemData:     00007ff8cde691d0
+    ProcessHeap:       000002205f490000
+    ProcessParameters: 000002205f491be0
+    CurrentDirectory:  'C:\Users\ANSSI\'
+    WindowTitle:  'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Notepad.lnk'
+    ImageFile:    'C:\Windows\system32\notepad.exe'
+    CommandLine:  '"C:\Windows\system32\notepad.exe" '
+    DllPath:      '< Name not readable >'
+    Environment:  000002205f490fe0
+        =::=::\
+        ALLUSERSPROFILE=C:\ProgramData
+        APPDATA=C:\Users\ANSSI\AppData\Roaming
+        CLIENTNAME=DESKTOP-CQNRREO
+        CommonProgramFiles=C:\Program Files\Common Files
+        CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+        CommonProgramW6432=C:\Program Files\Common Files
+        COMPUTERNAME=DESKTOP-M036B0J
+        ComSpec=C:\Windows\system32\cmd.exe
+        DriverData=C:\Windows\System32\Drivers\DriverData
+        HOMEDRIVE=C:
+        HOMEPATH=\Users\ANSSI
+        LOCALAPPDATA=C:\Users\ANSSI\AppData\Local
+        LOGONSERVER=\\DESKTOP-M036B0J
+        NUMBER_OF_PROCESSORS=4
+        OneDrive=C:\Users\ANSSI\OneDrive
+        OneDriveConsumer=C:\Users\ANSSI\OneDrive
+        OS=Windows_NT
+        Path=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\ANSSI\AppData\Local\Microsoft\WindowsApps;
+        PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+        PROCESSOR_ARCHITECTURE=AMD64
+        PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
+        PROCESSOR_LEVEL=6
+        PROCESSOR_REVISION=8e0c
+        ProgramData=C:\ProgramData
+        ProgramFiles=C:\Program Files
+        ProgramFiles(x86)=C:\Program Files (x86)
+        ProgramW6432=C:\Program Files
+        PSModulePath=C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+        PUBLIC=C:\Users\Public
+        SESSIONNAME=31C5CE94259D4006A9E4#0
+        SystemDrive=C:
+        SystemRoot=C:\Windows
+        TEMP=C:\Users\ANSSI\AppData\Local\Temp
+        TMP=C:\Users\ANSSI\AppData\Local\Temp
+        USERDOMAIN=DESKTOP-M036B0J
+        USERDOMAIN_ROAMINGPROFILE=DESKTOP-M036B0J
+        USERNAME=ANSSI
+        USERPROFILE=C:\Users\ANSSI
+        windir=C:\Windows
+0: kd> .process 0 0 
+.process 0 0 
+Implicit process is now ffff8907`c2a62040
+                  ^ Extra character error in '.process 0 0 '
+0: kd> !process 0 0 
+!process 0 0 
+**** NT ACTIVE PROCESS DUMP ****
+PROCESS ffff8907c2a62040
+    SessionId: none  Cid: 0004    Peb: 00000000  ParentCid: 0000
+    DirBase: 006d4000  ObjectTable: ffffd801f385de40  HandleCount: 2687.
+    Image: System
+
+PROCESS ffff8907c2ac9080
+    SessionId: none  Cid: 0064    Peb: 00000000  ParentCid: 0004
+    DirBase: 027f1000  ObjectTable: ffffd801f3858d40  HandleCount:   0.
+    Image: Registry
+
+PROCESS ffff8907c4acd040
+    SessionId: none  Cid: 01b4    Peb: b5e1d26000  ParentCid: 0004
+    DirBase: 07856000  ObjectTable: ffffd801f3d66840  HandleCount:  56.
+    Image: smss.exe
+
+PROCESS ffff8907c8248080
+    SessionId: 0  Cid: 0228    Peb: 7bccc31000  ParentCid: 021c
+    DirBase: 391b7000  ObjectTable: ffffd801f6f93500  HandleCount: 348.
+    Image: csrss.exe
+
+PROCESS ffff8907c846e080
+    SessionId: 0  Cid: 0274    Peb: eb88022000  ParentCid: 021c
+    DirBase: 3a0ac000  ObjectTable: ffffd801f73b4b00  HandleCount: 173.
+    Image: wininit.exe
+
+PROCESS ffff8907c8488140
+    SessionId: 1  Cid: 027c    Peb: 63d893a000  ParentCid: 026c
+    DirBase: 3a324000  ObjectTable: ffffd801f73b44c0  HandleCount: 172.
+    Image: csrss.exe
+
+PROCESS ffff8907c850c080
+    SessionId: 1  Cid: 02d0    Peb: 4ebc1ae000  ParentCid: 026c
+    DirBase: 3d202000  ObjectTable: ffffd801f73b3b40  HandleCount: 233.
+    Image: winlogon.exe
+
+PROCESS ffff8907c851c080
+    SessionId: 0  Cid: 0308    Peb: efab950000  ParentCid: 0274
+    DirBase: 3b74b000  ObjectTable: ffffd801f73b3e80  HandleCount: 366.
+    Image: services.exe
+
+PROCESS ffff8907c8520080
+    SessionId: 0  Cid: 031c    Peb: deec53a000  ParentCid: 0274
+    DirBase: 3ba76000  ObjectTable: ffffd801f73b3380  HandleCount: 1122.
+    Image: lsass.exe
+
+PROCESS ffff8907c85d0240
+    SessionId: 0  Cid: 038c    Peb: 9b637b9000  ParentCid: 0308
+    DirBase: 3f292000  ObjectTable: ffffd801f7472e80  HandleCount: 1261.
+    Image: svchost.exe
+
+PROCESS ffff8907c85d9140
+    SessionId: 1  Cid: 03a8    Peb: 5866bd1000  ParentCid: 02d0
+    DirBase: 3f43d000  ObjectTable: ffffd801f74737c0  HandleCount:  32.
+    Image: fontdrvhost.exe
+
+PROCESS ffff8907c85d2140
+    SessionId: 0  Cid: 03b0    Peb: ce796a1000  ParentCid: 0274
+    DirBase: 3f4f2000  ObjectTable: ffffd801f7473640  HandleCount:  32.
+    Image: fontdrvhost.exe
+
+PROCESS ffff8907c879c2c0
+    SessionId: 0  Cid: 01f0    Peb: 530ff35000  ParentCid: 0308
+    DirBase: 421e0000  ObjectTable: ffffd801f7474080  HandleCount: 919.
+    Image: svchost.exe
+
+PROCESS ffff8907c947a0c0
+    SessionId: 1  Cid: 0304    Peb: c8d0d87000  ParentCid: 02d0
+    DirBase: 40ef5000  ObjectTable: ffffd801f761f840  HandleCount: 671.
+    Image: LogonUI.exe
+
+PROCESS ffff8907c947d080
+    SessionId: 1  Cid: 0048    Peb: f1fde68000  ParentCid: 02d0
+    DirBase: 40e5b000  ObjectTable: ffffd801f76207c0  HandleCount: 793.
+    Image: dwm.exe
+
+PROCESS ffff8907c94b52c0
+    SessionId: 0  Cid: 0450    Peb: faf110a000  ParentCid: 0308
+    DirBase: 3fd46000  ObjectTable: ffffd801f7620e00  HandleCount: 733.
+    Image: svchost.exe
+
+PROCESS ffff8907c94b7240
+    SessionId: 0  Cid: 0458    Peb: f543157000  ParentCid: 0308
+    DirBase: 3fdd1000  ObjectTable: ffffd801f7620c80  HandleCount: 1958.
+    Image: svchost.exe
+
+PROCESS ffff8907c950a2c0
+    SessionId: 0  Cid: 04c8    Peb: 7f13d8b000  ParentCid: 0308
+    DirBase: 4257c000  ObjectTable: ffffd801f76d6080  HandleCount: 424.
+    Image: svchost.exe
+
+PROCESS ffff8907c950c300
+    SessionId: 0  Cid: 04d0    Peb: 5191a58000  ParentCid: 0308
+    DirBase: 40442000  ObjectTable: ffffd801f76d6d00  HandleCount: 723.
+    Image: svchost.exe
+
+PROCESS ffff8907c9536280
+    SessionId: 0  Cid: 0510    Peb: b7fcc1b000  ParentCid: 0308
+    DirBase: 409d2000  ObjectTable: ffffd801f76d7b00  HandleCount: 670.
+    Image: svchost.exe
+
+PROCESS ffff8907c959c2c0
+    SessionId: 0  Cid: 059c    Peb: 563f540000  ParentCid: 0308
+    DirBase: 437ce000  ObjectTable: ffffd801f76d7c80  HandleCount: 837.
+    Image: svchost.exe
+
+PROCESS ffff8907c9643240
+    SessionId: 0  Cid: 0630    Peb: 7533c70000  ParentCid: 0308
+    DirBase: 4712d000  ObjectTable: ffffd801f76d6380  HandleCount: 205.
+    Image: svchost.exe
+
+PROCESS ffff8907c96672c0
+    SessionId: 0  Cid: 064c    Peb: d3cc83000  ParentCid: 0308
+    DirBase: 4298c000  ObjectTable: ffffd801f76d6500  HandleCount: 234.
+    Image: svchost.exe
+
+PROCESS ffff8907c966f2c0
+    SessionId: 0  Cid: 0680    Peb: 8bee976000  ParentCid: 0308
+    DirBase: 29c08000  ObjectTable: ffffd801f76d6b40  HandleCount: 695.
+    Image: svchost.exe
+
+PROCESS ffff8907c966d080
+    SessionId: 0  Cid: 068c    Peb: 886db2e000  ParentCid: 0308
+    DirBase: 39683000  ObjectTable: ffffd801f7472840  HandleCount: 267.
+    Image: svchost.exe
+
+PROCESS ffff8907c2a7f080
+    SessionId: 0  Cid: 071c    Peb: 56bf4c5000  ParentCid: 0308
+    DirBase: 492c4000  ObjectTable: ffffd801f78f7980  HandleCount: 221.
+    Image: svchost.exe
+
+PROCESS ffff8907c2b7c080
+    SessionId: 0  Cid: 0794    Peb: 3570212000  ParentCid: 0308
+    DirBase: 3cc3c000  ObjectTable: ffffd801f76d6200  HandleCount: 163.
+    Image: VSSVC.exe
+
+PROCESS ffff8907c97c0080
+    SessionId: none  Cid: 06b0    Peb: 00000000  ParentCid: 0004
+    DirBase: 488ec000  ObjectTable: ffffd801f78f74c0  HandleCount:   0.
+    Image: MemCompression
+
+PROCESS ffff8907c2b05080
+    SessionId: 0  Cid: 07f4    Peb: eacf9a3000  ParentCid: 0308
+    DirBase: 46d34000  ObjectTable: ffffd801f78f7340  HandleCount: 225.
+    Image: svchost.exe
+
+PROCESS ffff8907c2a99080
+    SessionId: 0  Cid: 0820    Peb: 8299729000  ParentCid: 0308
+    DirBase: 3f00c000  ObjectTable: ffffd801f78f7c80  HandleCount: 132.
+    Image: svchost.exe
+
+PROCESS ffff8907c97cb300
+    SessionId: 0  Cid: 0838    Peb: 5329d33000  ParentCid: 0308
+    DirBase: 43c78000  ObjectTable: ffffd801f78f69c0  HandleCount: 369.
+    Image: svchost.exe
+
+PROCESS ffff8907c98b0240
+    SessionId: 0  Cid: 08c4    Peb: 00226000  ParentCid: 0308
+    DirBase: 4b67f000  ObjectTable: ffffd801f7b9c080  HandleCount: 620.
+    Image: spoolsv.exe
+
+PROCESS ffff8907c98b2300
+    SessionId: 0  Cid: 08d8    Peb: 319df8c000  ParentCid: 0308
+    DirBase: 4b931000  ObjectTable: ffffd801f7b9e600  HandleCount: 422.
+    Image: svchost.exe
+
+PROCESS ffff8907c9a1c240
+    SessionId: 0  Cid: 0a3c    Peb: ea9acc2000  ParentCid: 0308
+    DirBase: 4e345000  ObjectTable: ffffd801f7b9d340  HandleCount: 562.
+    Image: svchost.exe
+
+PROCESS ffff8907c9a52340
+    SessionId: 0  Cid: 0a80    Peb: acdd294000  ParentCid: 0308
+    DirBase: 4c6ba000  ObjectTable: ffffd801f7b9f580  HandleCount: 795.
+    Image: MsMpEng.exe
+
+PROCESS ffff8907c9ad8140
+    SessionId: 2  Cid: 0b64    Peb: f585f55000  ParentCid: 0b54
+    DirBase: 4f2fe000  ObjectTable: ffffd801f7fa81c0  HandleCount: 376.
+    Image: csrss.exe
+
+PROCESS ffff8907c9b11080
+    SessionId: 2  Cid: 0ba4    Peb: 4cce44e000  ParentCid: 0b54
+    DirBase: 53d84000  ObjectTable: ffffd801f7fa9600  HandleCount: 279.
+    Image: winlogon.exe
+
+PROCESS ffff8907c9b53080
+    SessionId: 0  Cid: 06d0    Peb: 64afb2f000  ParentCid: 0308
+    DirBase: 55bb6000  ObjectTable: ffffd801f7fa8800  HandleCount: 337.
+    Image: WUDFHost.exe
+
+PROCESS ffff8907ca236080
+    SessionId: 2  Cid: 02ac    Peb: d31a36a000  ParentCid: 0ba4
+    DirBase: 57b13000  ObjectTable: ffffd801f7fa8980  HandleCount: 848.
+    Image: dwm.exe
+
+PROCESS ffff8907ca40c080
+    SessionId: 2  Cid: 0b54    Peb: 3f92b0c000  ParentCid: 0ba4
+    DirBase: 5d31a000  ObjectTable: ffffd801f7fa79c0  HandleCount:  32.
+    Image: fontdrvhost.exe
+
+PROCESS ffff8907ca47b2c0
+    SessionId: 0  Cid: 0c28    Peb: efb22db000  ParentCid: 0308
+    DirBase: 60b98000  ObjectTable: ffffd801f7fa7b80  HandleCount: 217.
+    Image: svchost.exe
+
+PROCESS ffff8907ca6870c0
+    SessionId: 0  Cid: 0e90    Peb: 7286701000  ParentCid: 0308
+    DirBase: 40258000  ObjectTable: ffffd801f7fa84c0  HandleCount: 210.
+    Image: NisSrv.exe
+
+PROCESS ffff8907ca24a080
+    SessionId: 0  Cid: 0f14    Peb: b1090a5000  ParentCid: 0308
+    DirBase: 5dc1c000  ObjectTable: ffffd801f7faad80  HandleCount: 184.
+    Image: svchost.exe
+
+PROCESS ffff8907ca6e62c0
+    SessionId: 0  Cid: 0f78    Peb: 47221dd000  ParentCid: 038c
+    DirBase: 765b6000  ObjectTable: ffffd801f8168c40  HandleCount: 199.
+    Image: WmiPrvSE.exe
+
+PROCESS ffff8907ca78f340
+    SessionId: 0  Cid: 0fe4    Peb: 295eacd000  ParentCid: 0308
+    DirBase: 74140000  ObjectTable: ffffd801f8168140  HandleCount: 226.
+    Image: svchost.exe
+
+PROCESS ffff8907c4775080
+    SessionId: 2  Cid: 087c    Peb: a239527000  ParentCid: 0450
+    DirBase: 775bf000  ObjectTable: ffffd801f9093580  HandleCount: 363.
+    Image: rdpclip.exe
+
+PROCESS ffff8907ca7ee280
+    SessionId: 2  Cid: 0db8    Peb: c36dbcb000  ParentCid: 0458
+    DirBase: 7834b000  ObjectTable: ffffd801f91f7600  HandleCount: 532.
+    Image: sihost.exe
+
+PROCESS ffff8907ca7f02c0
+    SessionId: 2  Cid: 1018    Peb: 8f05632000  ParentCid: 0308
+    DirBase: 7cb52000  ObjectTable: ffffd801f91f5d00  HandleCount: 658.
+    Image: svchost.exe
+
+PROCESS ffff8907c97d3300
+    SessionId: 2  Cid: 1060    Peb: 70b1d42000  ParentCid: 0458
+    DirBase: 7893a000  ObjectTable: ffffd801f91f6cc0  HandleCount: 260.
+    Image: taskhostw.exe
+
+PROCESS ffff8907ca8ee080
+    SessionId: 2  Cid: 1174    Peb: 9691a2c000  ParentCid: 0ba4
+    DirBase: 636a0000  ObjectTable: 00000000  HandleCount:   0.
+    Image: userinit.exe
+
+PROCESS ffff8907caa8d080
+    SessionId: 2  Cid: 11d0    Peb: 0026a000  ParentCid: 1174
+    DirBase: 7c5a3000  ObjectTable: ffffd801f91f7140  HandleCount: 2168.
+    Image: explorer.exe
+
+PROCESS ffff8907cab362c0
+    SessionId: 2  Cid: 12c0    Peb: bd0d2bb000  ParentCid: 0308
+    DirBase: 5e3a3000  ObjectTable: ffffd801f91f9880  HandleCount: 337.
+    Image: svchost.exe
+
+PROCESS ffff8907cab79280
+    SessionId: 2  Cid: 132c    Peb: 4d74291000  ParentCid: 0510
+    DirBase: 69672000  ObjectTable: ffffd801f91f9a00  HandleCount: 442.
+    Image: ctfmon.exe
+
+PROCESS ffff8907cac1a240
+    SessionId: 0  Cid: 13e0    Peb: e93b92000  ParentCid: 0308
+    DirBase: 674e6000  ObjectTable: ffffd801f91fb180  HandleCount: 717.
+    Image: SearchIndexer.exe
+
+PROCESS ffff8907cacdc0c0
+    SessionId: 2  Cid: 1314    Peb: 4c94e6e000  ParentCid: 038c
+    DirBase: 591e5000  ObjectTable: ffffd801f91fc280  HandleCount: 834.
+    Image: StartMenuExperienceHost.exe
+
+PROCESS ffff8907cac98080
+    SessionId: 0  Cid: 0810    Peb: 1182585000  ParentCid: 13e0
+    DirBase: 568b1000  ObjectTable: ffffd801f91fa680  HandleCount: 399.
+    Image: SearchProtocolHost.exe
+
+PROCESS ffff8907cab40080
+    SessionId: 0  Cid: 10f4    Peb: 491b60d000  ParentCid: 13e0
+    DirBase: 48483000  ObjectTable: ffffd801f91fbac0  HandleCount: 143.
+    Image: SearchFilterHost.exe
+
+PROCESS ffff8907cae052c0
+    SessionId: 2  Cid: 1458    Peb: faa2ce0000  ParentCid: 038c
+    DirBase: 40b2d000  ObjectTable: ffffd801f91fb940  HandleCount: 482.
+    Image: RuntimeBroker.exe
+
+PROCESS ffff8907cadf0080
+    SessionId: 2  Cid: 14c0    Peb: 1398a15000  ParentCid: 038c
+DeepFreeze
+    DirBase: 77d0a000  ObjectTable: ffffd801f91fbc40  HandleCount: 1321.
+    Image: SearchApp.exe
+
+PROCESS ffff8907cb2712c0
+    SessionId: 2  Cid: 1590    Peb: 39198e5000  ParentCid: 038c
+    DirBase: 31151000  ObjectTable: ffffd801f91fa340  HandleCount: 684.
+    Image: RuntimeBroker.exe
+
+PROCESS ffff8907ca6e12c0
+    SessionId: 2  Cid: 14d0    Peb: 6fae17a000  ParentCid: 038c
+    DirBase: 6b311000  ObjectTable: ffffd801f9cf9b00  HandleCount: 300.
+    Image: RuntimeBroker.exe
+
+PROCESS ffff8907cb31e2c0
+    SessionId: 2  Cid: 0c94    Peb: 79bc0f2000  ParentCid: 038c
+    DirBase: 82a2a000  ObjectTable: ffffd801f91f9080  HandleCount: 408.
+    Image: smartscreen.exe
+
+PROCESS ffff8907ca57e080
+    SessionId: 2  Cid: 0a48    Peb: 82f7aa5000  ParentCid: 11d0
+    DirBase: 8253b000  ObjectTable: ffffd801f91fa500  HandleCount: 167.
+    Image: SecurityHealthSystray.exe
+
+PROCESS ffff8907ca57d080
+    SessionId: 0  Cid: 0dec    Peb: 5dd6251000  ParentCid: 0308
+    DirBase: 828f7000  ObjectTable: ffffd801f9cfa140  HandleCount: 329.
+    Image: SecurityHealthService.exe
+
+PROCESS ffff8907cb8da0c0
+    SessionId: 0  Cid: 163c    Peb: 3f78ec9000  ParentCid: 0308
+    DirBase: 83bee000  ObjectTable: ffffd801f9cfa940  HandleCount: 224.
+    Image: svchost.exe
+
+PROCESS ffff8907c4854300
+    SessionId: 2  Cid: 1878    Peb: 04993000  ParentCid: 115c
+    DirBase: 6043c000  ObjectTable: ffffd801f91f53c0  HandleCount: 677.
+    Image: OneDrive.exe
+
+PROCESS ffff8907cb321080
+    SessionId: 2  Cid: 197c    Peb: 6e198a3000  ParentCid: 11d0
+    DirBase: 1104a000  ObjectTable: ffffd801f7fa76c0  HandleCount: 697.
+    Image: powershell.exe
+
+PROCESS ffff8907cb372080
+    SessionId: 2  Cid: 1984    Peb: b77ff26000  ParentCid: 197c
+    DirBase: 136b8000  ObjectTable: ffffd801f9093d80  HandleCount: 194.
+    Image: conhost.exe
+
+PROCESS ffff8907caf3f0c0
+    SessionId: 2  Cid: 1a44    Peb: ca03cad000  ParentCid: 038c
+    DirBase: 0813b000  ObjectTable: ffffd801f91facc0  HandleCount: 582.
+    Image: TextInputHost.exe
+
+PROCESS ffff8907ca68c080
+    SessionId: 2  Cid: 1abc    Peb: 7c838df000  ParentCid: 038c
+    DirBase: 01e49000  ObjectTable: ffffd801f9cf8540  HandleCount: 238.
+    Image: dllhost.exe
+
+PROCESS ffff8907c7d3b340
+    SessionId: 2  Cid: 1b94    Peb: beb965d000  ParentCid: 11d0
+    DirBase: 054ea000  ObjectTable: ffffd801f9cf9cc0  HandleCount: 241.
+    Image: notepad.exe
+
+PROCESS ffff8907caff6080
+    SessionId: 2  Cid: 1bc4    Peb: 5f8d6ea000  ParentCid: 038c
+DeepFreeze
+    DirBase: 23554000  ObjectTable: ffffd801f9cfc880  HandleCount: 513.
+    Image: backgroundTaskHost.exe
+
+PROCESS ffff8907caecf240
+    SessionId: 2  Cid: 0ecc    Peb: ce41292000  ParentCid: 038c
+DeepFreeze
+    DirBase: 1e869000  ObjectTable: ffffd801f91fcd80  HandleCount: 298.
+    Image: backgroundTaskHost.exe
+
+PROCESS ffff8907cb8b22c0
+    SessionId: 2  Cid: 17e4    Peb: 66972ad000  ParentCid: 038c
+    DirBase: 0132a000  ObjectTable: ffffd801f9cff100  HandleCount: 182.
+    Image: RuntimeBroker.exe
+
+PROCESS ffff8907cb85e240
+    SessionId: 2  Cid: 1858    Peb: 7ff8fb1000  ParentCid: 038c
+    DirBase: 07f15000  ObjectTable: ffffd801f9cfe300  HandleCount: 129.
+    Image: RuntimeBroker.exe
+
+PROCESS ffff8907c468f0c0
+    SessionId: 2  Cid: 0ec4    Peb: 6c30e8d000  ParentCid: 197c
+    DirBase: 0a19d000  ObjectTable: ffffd801f9cfca00  HandleCount:  60.
+    Image: [Tech]ReflectiveDLL.exe
+
+PROCESS ffff8907c437e080
+    SessionId: 2  Cid: 0e24    Peb: c9bc76c000  ParentCid: 0ec4
+    DirBase: 09e1c000  ObjectTable: ffffd801f9cf9040  HandleCount:  71.
+    Image: cmd.exe
+
+0: kd> .process /p ffff8907c468f0c0; !peb 6c30e8d000
+.process /p ffff8907c468f0c0; !peb 6c30e8d000
+Implicit process is now ffff8907`c468f0c0
+PEB at 0000006c30e8d000
+    InheritedAddressSpace:    No
+    ReadImageFileExecOptions: No
+    BeingDebugged:            No
+    ImageBaseAddress:         00007ff770c00000
+    NtGlobalFlag:             0
+    NtGlobalFlag2:            0
+    Ldr                       00007ff8d5e1a4c0
+    Ldr.Initialized:          Yes
+    Ldr.InInitializationOrderModuleList: 000002024c7d2520 . 000002024c7ebe00
+    Ldr.InLoadOrderModuleList:           000002024c7d2690 . 000002024c7ec010
+    Ldr.InMemoryOrderModuleList:         000002024c7d26a0 . 000002024c7ec020
+                    Base TimeStamp                     Module
+            7ff770c00000 6093ed37 May 06 15:20:55 2021 C:\Users\ANSSI\Desktop\[Tech]ReflectiveDLL.exe
+            7ff8d5cb0000 9bed63d6 Nov 24 02:54:30 2052 C:\Windows\SYSTEM32\ntdll.dll
+            7ff8d5aa0000 61e69688 Jan 18 11:29:28 2022 C:\Windows\System32\KERNEL32.DLL
+            7ff8d33f0000 2f2f77bf Feb 01 12:59:59 1995 C:\Windows\System32\KERNELBASE.dll
+            7ff8d0cb0000 dc01baa3 Dec 19 02:47:15 2086 C:\Windows\SYSTEM32\apphelp.dll
+            7ff8d3c10000 2bd748bf Apr 23 03:39:11 1993 C:\Windows\System32\ucrtbase.dll
+            7ff8a7830000 57bfd5c1 Aug 26 07:38:09 2016 C:\Windows\SYSTEM32\MSVCP140.dll
+            7ff8c29e0000 5f25bf26 Aug 01 21:14:46 2020 C:\Windows\SYSTEM32\VCRUNTIME140_1.dll
+            7ff8c29c0000 57bfd5ab Aug 26 07:37:47 2016 C:\Windows\SYSTEM32\VCRUNTIME140.dll
+            7ff8d4d30000 4782ccda Jan 08 02:07:38 2008 C:\Windows\System32\sechost.dll
+            7ff8d43a0000 4c237b59 Jun 24 17:35:53 2010 C:\Windows\System32\RPCRT4.dll
+    SubSystemData:     0000000000000000
+    ProcessHeap:       000002024c7d0000
+    ProcessParameters: 000002024c7d1c50
+    CurrentDirectory:  'C:\Users\ANSSI\Desktop\'
+    WindowTitle:  'C:\Users\ANSSI\Desktop\[Tech]ReflectiveDLL.exe'
+    ImageFile:    'C:\Users\ANSSI\Desktop\[Tech]ReflectiveDLL.exe'
+    CommandLine:  '"C:\Users\ANSSI\Desktop\[Tech]ReflectiveDLL.exe" notepad.exe'
+    DllPath:      '< Name not readable >'
+    Environment:  000002024c7d0fe0
+        =::=::\
+        ALLUSERSPROFILE=C:\ProgramData
+        APPDATA=C:\Users\ANSSI\AppData\Roaming
+        CLIENTNAME=DESKTOP-CQNRREO
+        CommonProgramFiles=C:\Program Files\Common Files
+        CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+        CommonProgramW6432=C:\Program Files\Common Files
+        COMPUTERNAME=DESKTOP-M036B0J
+        ComSpec=C:\Windows\system32\cmd.exe
+        DriverData=C:\Windows\System32\Drivers\DriverData
+        HOMEDRIVE=C:
+        HOMEPATH=\Users\ANSSI
+        LOCALAPPDATA=C:\Users\ANSSI\AppData\Local
+        LOGONSERVER=\\DESKTOP-M036B0J
+        NUMBER_OF_PROCESSORS=4
+        OneDrive=C:\Users\ANSSI\OneDrive
+        OneDriveConsumer=C:\Users\ANSSI\OneDrive
+        OS=Windows_NT
+        Path=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\ANSSI\AppData\Local\Microsoft\WindowsApps;
+        PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+        PROCESSOR_ARCHITECTURE=AMD64
+        PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
+        PROCESSOR_LEVEL=6
+        PROCESSOR_REVISION=8e0c
+        ProgramData=C:\ProgramData
+        ProgramFiles=C:\Program Files
+        ProgramFiles(x86)=C:\Program Files (x86)
+        ProgramW6432=C:\Program Files
+        PSModulePath=C:\Users\ANSSI\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+        PUBLIC=C:\Users\Public
+        SESSIONNAME=31C5CE94259D4006A9E4#0
+        SystemDrive=C:
+        SystemRoot=C:\Windows
+        TEMP=C:\Users\ANSSI\AppData\Local\Temp
+        TMP=C:\Users\ANSSI\AppData\Local\Temp
+        USERDOMAIN=DESKTOP-M036B0J
+        USERDOMAIN_ROAMINGPROFILE=DESKTOP-M036B0J
+        USERNAME=ANSSI
+        USERPROFILE=C:\Users\ANSSI
+        windir=C:\Windows
+0: kd> !handle
+!handle
+
+PROCESS ffff8907c468f0c0
+    SessionId: 2  Cid: 0ec4    Peb: 6c30e8d000  ParentCid: 197c
+    DirBase: 0a19d000  ObjectTable: ffffd801f9cfca00  HandleCount:  60.
+    Image: [Tech]ReflectiveDLL.exe
+
+Handle table at ffffd801f9cfca00 with 60 entries in use
+
+0004: Object: ffff8907cb9eae50  GrantedAccess: 0012019f (Inherit) Entry: ffffd801fa8fe010
+Object: ffff8907cb9eae50  Type: (ffff8907c2af70c0) File
+    ObjectHeader: ffff8907cb9eae20 (new version)
+        HandleCount: 3  PointerCount: 98304
+        Directory Object: 00000000  Name: \Reference {ConDrv}
+
+0008: Object: ffff8907c7e610e0  GrantedAccess: 001f0003 (Protected) (Inherit) Entry: ffffd801fa8fe020
+Object: ffff8907c7e610e0  Type: (ffff8907c2ab4bc0) Event
+    ObjectHeader: ffff8907c7e610b0 (new version)
+        HandleCount: 1  PointerCount: 32768
+
+000c: Object: ffff8907c7e601e0  GrantedAccess: 001f0003 (Protected) (Inherit) Entry: ffffd801fa8fe030
+Object: ffff8907c7e601e0  Type: (ffff8907c2ab4bc0) Event
+    ObjectHeader: ffff8907c7e601b0 (new version)
+        HandleCount: 1  PointerCount: 32769
+
+0010: Object: ffff8907cb005650  GrantedAccess: 00000001 (Inherit) Entry: ffffd801fa8fe040
+Object: ffff8907cb005650  Type: (ffff8907c2af8400) WaitCompletionPacket
+    ObjectHeader: ffff8907cb005620 (new version)
+        HandleCount: 1  PointerCount: 32769
+
+0014: Object: ffff8907ca507680  GrantedAccess: 001f0003 (Protected) (Audit) Entry: ffffd801fa8fe050
+Object: ffff8907ca507680  Type: (ffff8907c2af74e0) IoCompletion
+    ObjectHeader: ffff8907ca507650 (new version)
+        HandleCount: 1  PointerCount: 32769
+
+0018: Object: ffff8907ca3c9470  GrantedAccess: 000f00ff (Audit) Entry: ffffd801fa8fe060
+Object: ffff8907ca3c9470  Type: (ffff8907c2af8560) TpWorkerFactory
+    ObjectHeader: ffff8907ca3c9440 (new version)
+        HandleCount: 1  PointerCount: 32768
+
+001c: Object: ffff8907c8369b60  GrantedAccess: 00100002 (Protected) (Inherit) Entry: ffffd801fa8fe070
+Object: ffff8907c8369b60  Type: (ffff8907c2ab4380) IRTimer
+    ObjectHeader: ffff8907c8369b30 (new version)
+        HandleCount: 1  PointerCount: 32769
+
+0020: Object: ffff8907cb018970  GrantedAccess: 00000001 (Audit) Entry: ffffd801fa8fe080
+Object: ffff8907cb018970  Type: (ffff8907c2af8400) WaitCompletionPacket
+    ObjectHeader: ffff8907cb018940 (new version)
+        HandleCount: 1  PointerCount: 32769
+
+0024: Object: ffff8907c8369e90  GrantedAccess: 00100002 (Inherit) (Audit) Entry: ffffd801fa8fe090
+Object: ffff8907c8369e90  Type: (ffff8907c2ab4380) IRTimer
+    ObjectHeader: ffff8907c8369e60 (new version)
+        HandleCount: 1  PointerCount: 32769
+
+0028: Object: ffff8907cb0190c0  GrantedAccess: 00000001 (Protected) Entry: ffffd801fa8fe0a0
+Object: ffff8907cb0190c0  Type: (ffff8907c2af8400) WaitCompletionPacket
+    ObjectHeader: ffff8907cb019090 (new version)
+        HandleCount: 1  PointerCount: 32769
+
+002c: Object: ffff8907ca5080e0  GrantedAccess: 00000804 (Protected) (Inherit) Entry: ffffd801fa8fe0b0
+Object: ffff8907ca5080e0  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907ca5080b0 (new version)
+        HandleCount: 1  PointerCount: 1
+
+0030: Object: ffff8907ca508460  GrantedAccess: 00000804 (Protected) (Inherit) Entry: ffffd801fa8fe0c0
+Object: ffff8907ca508460  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907ca508430 (new version)
+        HandleCount: 1  PointerCount: 1
+
+0034: Object: ffff8907ca5159e0  GrantedAccess: 00000804 (Protected) (Inherit) Entry: ffffd801fa8fe0d0
+Object: ffff8907ca5159e0  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907ca5159b0 (new version)
+        HandleCount: 1  PointerCount: 1
+
+0038: Object: ffffd801f3ffb480  GrantedAccess: 00000003 (Protected) (Audit) Entry: ffffd801fa8fe0e0
+Object: ffffd801f3ffb480  Type: (ffff8907c2a930c0) Directory
+    ObjectHeader: ffffd801f3ffb450 (new version)
+        HandleCount: 72  PointerCount: 2354744
+        Directory Object: ffffd801f3842c70  Name: KnownDlls
+
+        Hash Address          Type                      Name
+        ---- -------          ----                      ----
+         00  ffffd801f3fe32d0 Section                   kernel32.dll
+         02  ffffd801f3fe5a90 Section                   ucrtbase.dll
+             ffffd801f3fe4110 Section                   WS2_32.dll
+             ffffd801f3fe3e10 Section                   MSCTF.dll
+             ffffd801f3fe3690 Section                   SHLWAPI.dll
+         03  ffffd801f3c3f090 Section                   kernelbase.dll
+         04  ffffd801f3fe35d0 Section                   wow64.dll
+         05  ffffd801f3c3e610 Section                   msvcp_win.dll
+             ffffd801f3fe5c10 Section                   gdiplus.dll
+             ffffd801f3ff0800 SymbolicLink              KnownDllPath
+         06  ffffd801f3fe2d90 Section                   user32.dll
+         08  ffffd801f3fe5310 Section                   bcrypt.dll
+         10  ffffd801f3faff90 Section                   COMCTL32.dll
+         11  ffffd801f3c3f2d0 Section                   cfgmgr32.dll
+         12  ffffd801f3fe5e50 Section                   combase.dll
+             ffffd801f3fe4890 Section                   IMM32.dll
+         13  ffffd801f3fe3a50 Section                   rpcrt4.dll
+         14  ffffd801f3fe53d0 Section                   bcryptPrimitives.dll
+             ffffd801f3fe5b50 Section                   ntdll.dll
+             ffffd801f3fe3f90 Section                   coml2.dll
+         16  ffffd801f3fe5790 Section                   win32u.dll
+         17  ffffd801f3fe4290 Section                   wow64cpu.dll
+         18  ffffd801f3fe4f50 Section                   COMDLG32.dll
+         19  ffffd801f3c3f210 Section                   gdi32full.dll
+             ffffd801f3fe2790 Section                   IMAGEHLP.dll
+         20  ffffd801f3fe23d0 Section                   SHELL32.dll
+         21  ffffd801f3fe4d10 Section                   sechost.dll
+         22  ffffd801f3c3e3d0 Section                   WINTRUST.dll
+         24  ffffd801f3fe2610 Section                   NORMALIZ.dll
+         25  ffffd801f3fe4a10 Section                   difxapi.dll
+         26  ffffd801f3fe3990 Section                   Setupapi.dll
+         27  ffffd801f3c3ee50 Section                   CRYPT32.dll
+         28  ffffd801f3fe5cd0 Section                   MSVCRT.dll
+             ffffd801f3fe5550 Section                   gdi32.dll
+         29  ffffd801f3fe5850 Section                   advapi32.dll
+             ffffd801f3fe2910 Section                   wow64win.dll
+         30  ffffd801f3fe4b90 Section                   PSAPI.DLL
+             ffffd801f3fe3bd0 Section                   NSI.dll
+         31  ffffd801f3fe4dd0 Section                   OLEAUT32.dll
+             ffffd801f3fe3810 Section                   WLDAP32.dll
+         33  ffffd801f3fe2550 Section                   SHCORE.dll
+         34  ffffd801f3fe4c50 Section                   ole32.dll
+         35  ffffd801f3fe4ad0 Section                   clbcatq.dll
+
+003c: Object: ffff8907c7e603e0  GrantedAccess: 001f0003 (Protected) (Inherit) Entry: ffffd801fa8fe0f0
+Object: ffff8907c7e603e0  Type: (ffff8907c2ab4bc0) Event
+    ObjectHeader: ffff8907c7e603b0 (new version)
+        HandleCount: 1  PointerCount: 32764
+
+0040: Object: ffff8907c7e60660  GrantedAccess: 001f0003 (Protected) (Inherit) Entry: ffffd801fa8fe100
+Object: ffff8907c7e60660  Type: (ffff8907c2ab4bc0) Event
+    ObjectHeader: ffff8907c7e60630 (new version)
+        HandleCount: 1  PointerCount: 32764
+
+0044: Object: ffff8907c9b6d6c0  GrantedAccess: 00100020 (Protected) Entry: ffffd801fa8fe110
+Object: ffff8907c9b6d6c0  Type: (ffff8907c2af70c0) File
+    ObjectHeader: ffff8907c9b6d690 (new version)
+        HandleCount: 1  PointerCount: 32768
+        Directory Object: 00000000  Name: \Users\ANSSI\Desktop {HarddiskVolume3}
+
+0048: Object: ffff8907cb9eb940  GrantedAccess: 0012019f (Protected) Entry: ffffd801fa8fe120
+Object: ffff8907cb9eb940  Type: (ffff8907c2af70c0) File
+    ObjectHeader: ffff8907cb9eb910 (new version)
+        HandleCount: 3  PointerCount: 98269
+        Directory Object: 00000000  Name: \Input {ConDrv}
+
+004c: Object: ffff8907cb6dab10  GrantedAccess: 00000804 (Inherit) (Audit) Entry: ffffd801fa8fe130
+Object: ffff8907cb6dab10  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6daae0 (new version)
+        HandleCount: 1  PointerCount: 32768
+
+0050: Object: ffff8907cb9eb490  GrantedAccess: 0012019f (Inherit) (Audit) Entry: ffffd801fa8fe140
+Object: ffff8907cb9eb490  Type: (ffff8907c2af70c0) File
+    ObjectHeader: ffff8907cb9eb460 (new version)
+        HandleCount: 9  PointerCount: 196506
+        Directory Object: 00000000  Name: \Output {ConDrv}
+
+0054: Object: ffff8907cb6db590  GrantedAccess: 00000804 (Inherit) (Audit) Entry: ffffd801fa8fe150
+Object: ffff8907cb6db590  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6db560 (new version)
+        HandleCount: 1  PointerCount: 32768
+
+0058: Object: ffff8907cb9eb490  GrantedAccess: 0012019f (Inherit) (Audit) Entry: ffffd801fa8fe160
+Object: ffff8907cb9eb490  Type: (ffff8907c2af70c0) File
+    ObjectHeader: ffff8907cb9eb460 (new version)
+        HandleCount: 9  PointerCount: 196506
+        Directory Object: 00000000  Name: \Output {ConDrv}
+
+005c: Object: ffff8907ca678a80  GrantedAccess: 001f0001 (Protected) (Audit) Entry: ffffd801fa8fe170
+Object: ffff8907ca678a80  Type: (ffff8907c2af8da0) ALPC Port
+    ObjectHeader: ffff8907ca678a50 (new version)
+        HandleCount: 1  PointerCount: 32770
+
+0060: Object: ffff8907c9b6cd60  GrantedAccess: 0012019f (Protected) (Inherit) Entry: ffffd801fa8fe180
+Object: ffff8907c9b6cd60  Type: (ffff8907c2af70c0) File
+    ObjectHeader: ffff8907c9b6cd30 (new version)
+        HandleCount: 1  PointerCount: 32758
+        Directory Object: 00000000  Name: \Connect {ConDrv}
+
+0064: Object: ffff8907cb6dabf0  GrantedAccess: 00000804 (Audit) Entry: ffffd801fa8fe190
+Object: ffff8907cb6dabf0  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6dabc0 (new version)
+        HandleCount: 1  PointerCount: 32768
+
+0068: Object: ffff8907cb6db9f0  GrantedAccess: 00000804 (Audit) Entry: ffffd801fa8fe1a0
+Object: ffff8907cb6db9f0  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6db9c0 (new version)
+        HandleCount: 1  PointerCount: 32768
+
+006c: Object: ffff8907cb6da330  GrantedAccess: 00000804 Entry: ffffd801fa8fe1b0
+Object: ffff8907cb6da330  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6da300 (new version)
+        HandleCount: 1  PointerCount: 32768
+
+0070: Object: ffff8907cb6db4b0  GrantedAccess: 00000804 Entry: ffffd801fa8fe1c0
+Object: ffff8907cb6db4b0  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6db480 (new version)
+        HandleCount: 1  PointerCount: 32768
+
+0074: Object: ffff8907cb6daa30  GrantedAccess: 00000804 Entry: ffffd801fa8fe1d0
+Object: ffff8907cb6daa30  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6daa00 (new version)
+        HandleCount: 1  PointerCount: 32768
+
+0078: Object: ffff8907cb6dacd0  GrantedAccess: 00000804 (Inherit) Entry: ffffd801fa8fe1e0
+Object: ffff8907cb6dacd0  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6daca0 (new version)
+        HandleCount: 1  PointerCount: 1
+
+007c: Object: ffff8907cb6dadb0  GrantedAccess: 00000804 Entry: ffffd801fa8fe1f0
+Object: ffff8907cb6dadb0  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6dad80 (new version)
+        HandleCount: 1  PointerCount: 32768
+
+0080: Object: ffff8907cb6da790  GrantedAccess: 00000804 (Inherit) (Audit) Entry: ffffd801fa8fe200
+Object: ffff8907cb6da790  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6da760 (new version)
+        HandleCount: 1  PointerCount: 1
+
+0084: Object: ffff8907cb6dbd70  GrantedAccess: 00000804 (Audit) Entry: ffffd801fa8fe210
+Object: ffff8907cb6dbd70  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6dbd40 (new version)
+        HandleCount: 1  PointerCount: 1
+
+0088: Object: ffff8907cb6db130  GrantedAccess: 00000804 Entry: ffffd801fa8fe220
+Object: ffff8907cb6db130  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6db100 (new version)
+        HandleCount: 1  PointerCount: 1
+
+008c: Object: ffff8907ca5845c0  GrantedAccess: 000f00ff (Protected) Entry: ffffd801fa8fe230
+Object: ffff8907ca5845c0  Type: (ffff8907c2af8560) TpWorkerFactory
+    ObjectHeader: ffff8907ca584590 (new version)
+        HandleCount: 1  PointerCount: 32745
+
+0090: Object: ffff8907cb6daf80  GrantedAccess: 001f0003 (Protected) (Audit) Entry: ffffd801fa8fe240
+Object: ffff8907cb6daf80  Type: (ffff8907c2af74e0) IoCompletion
+    ObjectHeader: ffff8907cb6daf50 (new version)
+        HandleCount: 1  PointerCount: 32769
+
+0094: Object: ffff8907cb01b070  GrantedAccess: 00000001 (Audit) Entry: ffffd801fa8fe250
+Object: ffff8907cb01b070  Type: (ffff8907c2af8400) WaitCompletionPacket
+    ObjectHeader: ffff8907cb01b040 (new version)
+        HandleCount: 1  PointerCount: 32769
+
+0098: Object: ffff8907c836ac60  GrantedAccess: 00100002 (Protected) (Inherit) Entry: ffffd801fa8fe260
+Object: ffff8907c836ac60  Type: (ffff8907c2ab4380) IRTimer
+    ObjectHeader: ffff8907c836ac30 (new version)
+        HandleCount: 1  PointerCount: 32769
+
+009c: Object: ffffd801f81fadc0  GrantedAccess: 0000000f (Protected) Entry: ffffd801fa8fe270
+Object: ffffd801f81fadc0  Type: (ffff8907c2a930c0) Directory
+    ObjectHeader: ffffd801f81fad90 (new version)
+        HandleCount: 25  PointerCount: 812144
+        Directory Object: ffffd801f81fd700  Name: BaseNamedObjects
+
+        Hash Address          Type                      Name
+        ---- -------          ----                      ----
+         00  ffff8907ca8c3b40 Event                     AnimatedFacadePropertyChangesComplete.4560.6196
+             ffff8907ca8bc980 Event                     HasAnimations.4560.6196
+             ffffd801f93f5090 Section                   windows_webcache_counters_{9B6AB5B3-91BC-4097-835C-EA2DEC95E9CC}_S-1-5-21-2855739481-3201411359-558298356-1003
+             ffff8907ca2800f0 Mutant                    SM0:4800:304:WilStaging_02
+             ffff8907ca8d35e0 Semaphore                 SM0:4560:120:WilError_03_p0h
+             ffff8907ca719660 Mutant                    RdpClipAlreadyRunningMutex
+         01  ffff8907c464ee10 Semaphore                 SM0:6232:304:WilStaging_02_p0
+             ffff8907c8037690 Mutant                    SM0:7060:304:WilStaging_02
+             ffff8907c8036850 Mutant                    SM0:6844:120:WilError_03
+             ffff8907cb1b0310 Semaphore                 SM0:6844:304:WilStaging_02_p0
+             ffffd801f8b39f20 Section                   C:*Users*ANSSI*AppData*Local*Microsoft*Windows*Caches*{3DA71D5A-20CC-432F-A115-DFE92379E91F}.3.ver0x0000000000000015.db
+             ffff8907cb17f5d0 Semaphore                 SM0:5328:120:WilError_03_p0
+             ffff8907caad87a0 Event                     MSCTF.CtfMonitorInitialized.Default2S-1-5-21-2855739481-3201411359-558298356-1003
+             ffff8907ca8c3a00 Semaphore                 SM0:4120:120:WilError_03_p0h
+             ffff8907ca290900 Semaphore                 SM0:2980:120:WilError_03_p0
+             ffff8907c9abf780 Event                     {773F1B9A-35B9-4E95-83A0-A210F2DE3B37}-request
+         02  ffff8907c4652e70 Semaphore                 SM0:7060:304:WilStaging_02_p0h
+             ffff8907cacce720 Event                     SubscribedContent-314559
+             ffff8907ca8b75c0 Semaphore                 SM0:3512:304:WilStaging_02_p0
+         03  ffffd801faf0d150 Section                   11d0HWNDInterface:1100ec
+             ffff8907cb1b2c50 Semaphore                 SM0:6844:120:WilError_03_p0
+             ffff8907cb1a63b0 Semaphore                 SM0:6524:120:WilError_03_p0h
+             ffff8907c8028150 Mutant                    SM0:6524:304:WilStaging_02
+             ffff8907cb1a1c70 Semaphore                 SM0:6532:120:WilError_03_p0h
+             ffff8907cb186510 Semaphore                 SM0:3220:304:WilStaging_02_p0h
+             ffff8907ca27b5f0 Mutant                    _SHuassist.mtx
+             ffffd801f93cf1d0 Section                   11d0HWNDInterface:101ca
+             ffff8907caad7ee0 Event                     {DFFDE213-8CB4-46a9-90EB-3DA843AF66F9}-crashed
+             ffffd801f8b41c60 Section                   C:*Users*ANSSI*AppData*Local*Microsoft*Windows*Caches*cversions.3.ro
+             ffff8907ca71ac20 Mutant                    SM0:3512:120:WilError_03
+         04  ffff8907cb1a1a90 Semaphore                 SM0:6532:304:WilStaging_02_p0h
+             ffff8907cb180430 Semaphore                 SM0:5520:120:WilError_03_p0
+             ffff8907caae0220 Event                     {F6151BD3-458B-4C93-9088-9F6A37F9EE97}
+             ffff8907cab8aa20 Mutant                    MSCTF.CtfServerMutexDefault2
+             ffff8907ca2993c0 Semaphore                 SM0:684:304:WilStaging_02_p0
+         05  ffffd801f93ecf90 Section                   CTF.AsmListCache.FMPDefault2
+             ffffd801f93ce2d0 Section                   11d0HWNDInterface:101cc
+             ffff8907caadb360 Semaphore                 SM0:4908:120:WilError_03_p0h
+             ffff8907cab8af60 Mutant                    MSCTF.CtfMonitorInstMutexDefault2
+             ffff8907ca2a1ac0 Event                     DWM_DX_FULLSCREEN_TRANSITION_EVENT
+         06  ffff8907cad70a20 Mutant                    SM0:5520:304:WilStaging_02
+             ffff8907cad71860 Mutant                    MSCTF.Asm.MutexDefault2
+             ffff8907caad80c0 Event                     {773F1B9A-35B9-4E95-83A0-A210F2DE3B37}-sdl
+             ffffd801f7ed2b50 SymbolicLink              AppContainerNamedObjects
+             ffffd801f7ed3650 SymbolicLink              Local
+         07  ffff8907ca8c2f60 Event                     BrushTransitionsComplete.4560.6196
+             ffff8907ca8c3aa0 Event                     FacadeAnimationsComplete.4560.6196
+             ffff8907cad8a2e0 Mutant                    Microsoft-Windows-Safety-SmartScreen
+             ffffd801f93ce8d0 Section                   11d0HWNDInterface:101ce
+             ffff8907caada0a0 Event                     MSCTF.CtfDeactivated.Default2S-1-5-21-2855739481-3201411359-558298356-1003
+         08  ffff8907cb756d90 Semaphore                 SM0:6116:304:WilStaging_02_p0h
+             ffff8907cb1b2cf0 Semaphore                 SM0:6844:120:WilError_03_p0h
+             ffff8907c8032650 Mutant                    PSReadLineHistoryFile_1345792044
+             ffff8907ca8c1a20 Event                     HasBuildTreeWorks.4560.6196
+             ffff8907cb17fd50 Semaphore                 SM0:5328:120:WilError_03_p0h
+             ffff8907cacceb80 Event                     SubscribedContent-338388
+             ffff8907cad6f9a0 Mutant                    SM0:5208:304:WilStaging_02
+             ffff8907caadffa0 Semaphore                 CDP_CALLBACK_D794FBA9-8939-BF85-82A6-2A23FEE5A291
+         09  ffff8907cb180930 Semaphore                 SM0:5520:120:WilError_03_p0h
+             ffff8907cab91560 Mutant                    SM0:4908:120:WilError_03
+             ffff8907caad82a0 Event                     {958DA730-EDB5-43CE-8A56-776CCC5AB7E1}-request
+             ffff8907ca71f5a0 Mutant                    SM0:4560:120:WilError_03
+             ffff8907ca8bf360 Semaphore                 SM0:4120:304:WilStaging_02_p0
+             ffff8907ca2a5260 Semaphore                 SM0:2172:304:WilStaging_02_p0h
+         10  ffff8907cb192810 Semaphore                 SM0:6264:168:WilStaging_02_p0
+             ffff8907cacd0480 Event                     AppLaunchGrace-Microsoft.Windows.Search_1.14.0.19041_neutral_neutral_cw5n1h2txyewy+CortanaUI
+             ffff8907ca8cdc80 Event                     SIHostShutdownEvent
+             ffff8907ca8b6ee0 Event                     ShellDesktopSwitchEvent
+             ffff8907ca2a4860 Semaphore                 SM0:2980:304:WilStaging_02_p0h
+         11  ffff8907cb177790 Semaphore                 CDP_CALLBACK_CD7D45AA-FC6A-2E85-7D8F-324D58BD8AA3
+             ffffd801f93c5c90 Section                   11d0HWNDInterface:2016e
+             ffff8907caad7940 Event                     {DFFDE213-8CB4-46a9-90EB-3DA843AF66F9}-show
+             ffff8907ca291120 Semaphore                 SM0:2980:120:WilError_03_p0h
+         12  ffff8907c8038dd0 Mutant                    SM0:6116:304:WilStaging_02
+             ffff8907cb1a6310 Semaphore                 SM0:6524:120:WilError_03_p0
+             ffff8907cb9a55e0 Mutant                    SM0:6264:64:WilError_03
+             ffff8907cb18a110 Semaphore                 SM0:2632:304:WilStaging_02_p0
+             ffff8907cad7fc60 Mutant                    SM0:5520:120:WilError_03
+             ffff8907cb174450 Event                     BcastdvrStartup73BD1D72-A850-47FF-82E1-8F30D2C38FFE
+             ffff8907cacce180 Semaphore                 SM0:5208:120:WilError_03_p0
+             ffff8907caae7ac0 Event                     ShellReadyEvent
+             ffff8907caae18a0 Semaphore                 CDP_CALLBACK_94C608B9-BAA4-E622-5088-3D72BF907A22
+             ffff8907caad8700 Semaphore                 SM0:4908:304:WilStaging_02_p0h
+             ffffd801f7ed2c00 SymbolicLink              Session
+         13  ffff8907ca8c1b60 Event                     BuildTreeServiceDrained.4560.6196
+             ffff8907caadef60 Semaphore                 SM0:4800:120:WilError_03_p0
+             ffff8907caaddb60 Semaphore                 CDP_CALLBACK_75BEB51C-ED7C-7D56-B87F-95E591D00B13
+             ffff8907cab8ade0 Mutant                    CicLoadWinStaWinSta0
+             ffffd801f93bab90 Section                   11d0HWNDInterface:10152
+             ffff8907ca8c2e20 Semaphore                 SM0:4120:120:WilError_03_p0
+             ffff8907ca3daab0 Mutant                    SM0:684:304:WilStaging_02
+         14  ffff8907ca8c29c0 Event                     HasBrushTransitions.4560.6196
+             ffff8907ca8c1d40 Event                     ImplicitShowHideComplete.4560.6196
+             ffff8907caacd4e0 Event                     OneDriveSetup.exe-21.073.0411.0002-MachineGo
+             ffff8907ca721820 Mutant                    SignalManager_RegistrationCacheMutex
+             ffff8907ca8c26a0 Semaphore                 SM0:4192:120:WilError_03_p0
+             ffff8907ca8c0940 Semaphore                 SM0:4192:304:WilStaging_02_p0
+             ffff8907ca36ba30 Mutant                    SM0:2980:304:WilStaging_02
+             ffff8907ca3dab70 Mutant                    SM0:684:120:WilError_03
+             ffff8907c9abf3c0 Event                     EventShutDownCSRSS
+         15  ffff8907c8020290 Mutant                    SM0:6532:304:WilStaging_02
+             ffffd801f9c22450 Section                   11d0HWNDInterface:20294
+             ffffd801f93be910 Section                   11d0HWNDInterface:10160
+         16  ffffd801faf02f50 Section                   NLS_CodePage_1252_3_2_0_0
+             ffff8907cb1a5870 Semaphore                 SM0:6524:304:WilStaging_02_p0
+             ffff8907ca8bcb60 Event                     AnimationsComplete.4560.6196
+             ffff8907caad8200 Event                     {DFFDE213-8CB4-46a9-90EB-3DA843AF66F9}-request
+             ffff8907ca71b460 Mutant                    AccessibilitySoundAgentRunning
+             ffff8907c9ab79e0 Event                     EventRitExited
+         17  ffff8907c4652bf0 Semaphore                 SM0:7060:304:WilStaging_02_p0
+             ffff8907cb9a2ca0 Mutant                    SM0:6264:168:WilStaging_02
+             ffff8907cad86920 Mutant                    SM0:5328:120:WilError_03
+             ffff8907ca8c27e0 Semaphore                 SM0:4192:120:WilError_03_p0h
+         18  ffffd801f8161a60 Section                   windows_ie_global_counters
+             ffff8907cb17dc30 Semaphore                 SM0:5328:304:WilStaging_02_p0h
+             ffffd801f9c07f90 Section                   UrlZonesSM_ANSSI
+             ffff8907cacdab60 Semaphore                 SM0:5520:304:WilStaging_02_p0
+             ffff8907cab8a360 Mutant                    InputServiceHostMutex
+             ffffd801f7ed35a0 SymbolicLink              Global
+         19  ffff8907cb1892b0 Semaphore                 SM0:3220:120:WilError_03_p0
+             ffff8907cad8a160 Mutant                    SM0:3220:120:WilError_03
+             ffff8907cad710e0 Mutant                    SM0:3220:304:WilStaging_02
+             ffff8907cad7a860 Mutant                    ZonesLockedCacheCounterMutex
+             ffff8907cad76660 Mutant                    SM0:5208:120:WilError_03
+             ffff8907cacc3140 Semaphore                 SM0:5208:304:WilStaging_02_p0h
+             ffff8907ca8d3ae0 Semaphore                 SM0:4560:120:WilError_03_p0
+             ffff8907ca719f60 Mutant                    SM0:2172:304:WilStaging_02
+             ffff8907ca3dae70 Mutant                    DBWinMutex
+             ffff8907ca29c480 Semaphore                 SM0:684:120:WilError_03_p0h
+             ffffd801f8b2df20 Section                   SessionImmersiveColorPreference
+         20  ffff8907c46528d0 Semaphore                 SM0:7060:120:WilError_03_p0h
+             ffff8907ca8be0a0 Event                     FontDownloadsIdle.4560.6196
+             ffff8907ca8be3c0 Event                     ImageDecodingIdle.4560.6196
+             ffff8907cab94320 Mutant                    SM0:4800:120:WilError_03
+             ffff8907caadc080 Semaphore                 SM0:4908:120:WilError_03_p0
+             ffff8907caad9880 Semaphore                 SM0:4908:304:WilStaging_02_p0
+             ffff8907caad37a0 Semaphore                 SM0:4800:304:WilStaging_02_p0h
+             ffff8907ca71f360 Mutant                    SM0:4560:304:WilStaging_02
+         21  ffffd801faf147d0 Section                   NLS_CodePage_437_3_2_0_0
+             ffff8907ca8c0da0 Event                     PopupMenuCommandInvoked.4560.6196
+             ffff8907cad870a0 Mutant                    SM0:5328:304:WilStaging_02
+             ffff8907cacce9a0 Semaphore                 SM0:5208:120:WilError_03_p0h
+             ffffd801f93be6d0 Section                   11d0HWNDInterface:10166
+             ffff8907ca8ba360 Semaphore                 SM0:3512:120:WilError_03_p0h
+             ffff8907ca8b68a0 Event                     RDPClip-Disconnect
+         22  ffff8907cb9aa3e0 Mutant                    OneDrive_NetworkLock
+             ffff8907ca8bc5c0 Event                     HasDeferredAnimationOperations.4560.6196
+             ffff8907caadabe0 Event                     IshShutdown0000132c
+             ffff8907ca29c2a0 Semaphore                 SM0:684:120:WilError_03_p0
+         23  ffff8907ca8d1880 Event                     AppLaunchGrace-MicrosoftWindows.Client.CBS_120.2212.551.0_x64__cw5n1h2txyewy+InputApp
+             ffffd801f8149160 Section                   MSIMGSIZECacheMap
+             ffff8907caad47e0 Semaphore                 SM0:4800:304:WilStaging_02_p0
+             ffff8907ca8b8920 Semaphore                 SM0:3512:304:WilStaging_02_p0h
+             ffff8907ca3dac30 Mutant                    SessionImmersiveColorMutex
+         24  ffff8907cb755f30 Semaphore                 SM0:6116:304:WilStaging_02_p0
+             ffff8907cb1a2210 Semaphore                 SM0:6532:120:WilError_03_p0
+             ffffd801f93bdd10 Section                   C:*ProgramData*Microsoft*Windows*Caches*cversions.2.ro
+             ffff8907ca29f360 Semaphore                 SM0:4560:304:WilStaging_02_p0h
+         25  ffff8907c8035dd0 Mutant                    SM0:6844:304:WilStaging_02
+             ffff8907caae0720 Semaphore                 SM0:4800:120:WilError_03_p0h
+             ffff8907caade880 Semaphore                 CDP_CALLBACK_F96D6D87-7D6E-8508-DE8A-421CBF9FA50B
+             ffff8907ca49b590 ALPC Port                 SIPC_{2819B8FF-EB1C-4652-80F0-7AB4EFA88BE4}
+         26  ffff8907c8039190 Mutant                    SM0:6232:304:WilStaging_02
+             ffff8907c802d250 Mutant                    SM0:6524:120:WilError_03
+             ffff8907c8020710 Mutant                    SM0:6532:120:WilError_03
+             ffff8907ca8c2a60 Event                     PageNavigationComplete.4560.6196
+             ffff8907cb18a1b0 Semaphore                 SM0:2632:304:WilStaging_02_p0h
+             ffff8907cb178a50 Semaphore                 CDP_CALLBACK_9753DA91-06C5-F1F3-7876-B91CCA8DBE34
+             ffff8907ca8c2380 Event                     NavigationServer Started
+         27  ffff8907cb1a1950 Semaphore                 SM0:6532:304:WilStaging_02_p0
+             ffff8907cb99bb60 Mutant                    _!SHMSFTHISTORY!_
+             ffff8907ca8c1c00 Event                     KeyboardInputReceived.4560.6196
+             ffff8907ca8bdc40 Event                     RootVisualReset.4560.6196
+             ffffd801f93ce450 Section                   11d0HWNDInterface:101d0
+             ffff8907ca71a3e0 Mutant                    SM0:3512:304:WilStaging_02
+         28  ffff8907ca8bc660 Event                     DeferredAnimationOperationsComplete.4560.6196
+             ffff8907cacda700 Semaphore                 SM0:5520:304:WilStaging_02_p0h
+             ffff8907cacbbf80 Semaphore                 SM0:5208:304:WilStaging_02_p0
+             ffff8907cab8ec20 Mutant                    CDPUserSvc_Ready_db7a3b24-68b7-4c2e-8335-533dd99ee0f6_S-1-5-21-2855739481-3201411359-558298356-1003
+             ffffd801f93c01d0 Section                   11d0HWNDInterface:1015a
+         29  ffffd801f93cee10 Section                   11d0HWNDInterface:101d2
+             ffffd801f93bbb50 Section                   C:*ProgramData*Microsoft*Windows*Caches*{DDF571F2-BE98-426D-8288-1A9A39C3FDA2}.2.ver0x0000000000000001.db
+         30  ffff8907cb9ab460 Mutant                    !BrowserEmulation!SharedMemory!Mutex
+             ffff8907caad76c0 Event                     {773F1B9A-35B9-4E95-83A0-A210F2DE3B37}-uds
+             ffffd801f93bcbd0 Section                   C:*ProgramData*Microsoft*Windows*Caches*{6AF0698E-D558-4F6E-9B3C-3716689AF493}.2.ver0x0000000000000001.db
+             ffff8907ca71a1a0 Mutant                    SM0:4192:120:WilError_03
+             ffff8907ca2a4360 Semaphore                 SM0:2980:304:WilStaging_02_p0
+             ffff8907ca299b40 Semaphore                 SM0:684:304:WilStaging_02_p0h
+             ffff8907ca3d9a30 Mutant                    SM0:2980:120:WilError_03
+             ffffd801f81fb540 Directory                 Restricted
+         31  ffff8907c4653370 Semaphore                 SM0:6232:304:WilStaging_02_p0h
+             ffff8907c8037810 Mutant                    SM0:7060:120:WilError_03
+             ffff8907cb1b1530 Semaphore                 SM0:6844:304:WilStaging_02_p0h
+             ffff8907cad7a1a0 Mutant                    ZonesCacheCounterMutex
+             ffffd801f93cdc10 Section                   11d0HWNDInterface:101d4
+             ffffd801f93cf110 Section                   11d0HWNDInterface:101c8
+             ffff8907ca8c21a0 Event                     BINotifiedNewSessionEvent
+         32  ffff8907cb186ab0 Semaphore                 SM0:3220:304:WilStaging_02_p0
+             ffff8907ca8ba2c0 Semaphore                 SM0:3512:120:WilError_03_p0
+             ffff8907ca29d2e0 Event                     DwmComposedEvent_1
+             ffff8907c9abf5a0 Event                     {773F1B9A-35B9-4E95-83A0-A210F2DE3B37}-running
+         33  ffff8907c4651f70 Semaphore                 SM0:7060:120:WilError_03_p0
+             ffff8907cb1a5d70 Semaphore                 SM0:6524:304:WilStaging_02_p0h
+             ffff8907cb1929f0 Semaphore                 SM0:6264:64:WilError_03_p0
+             ffff8907caacd800 Event                     OneDriveSetup.exe-21.073.0411.0002-MachineCancel
+             ffff8907cb17d730 Semaphore                 SM0:5328:304:WilStaging_02_p0
+             ffffd801f93ceed0 Section                   11d0HWNDInterface:101d6
+             ffff8907caad8840 Event                     MSCTF.CtfActivated.Default2S-1-5-21-2855739481-3201411359-558298356-1003
+             ffff8907ca8c10c0 Semaphore                 SM0:4192:304:WilStaging_02_p0h
+             ffff8907ca71b2e0 Mutant                    SM0:4120:304:WilStaging_02
+             ffff8907c9ab8e80 Event                     ScNetDrvMsg
+         34  ffff8907cb1895d0 Semaphore                 SM0:3220:120:WilError_03_p0h
+             ffff8907cb17c330 Event                     ShellLauncherLoginEvent
+             ffffd801f9c07c90 Section                   11d0HWNDInterface:10110
+             ffff8907cacbca20 Event                     AppLaunchGrace-Microsoft.Windows.StartMenuExperienceHost_10.0.19041.610_neutral_neutral_cw5n1h2txyewy+App
+             ffff8907cab8a720 Mutant                    SM0:4908:304:WilStaging_02
+             ffff8907ca8bef00 Semaphore                 SM0:4120:304:WilStaging_02_p0h
+             ffff8907ca8b6c60 Event                     RDPClip-Reconnect
+             ffff8907ca29b6c0 Event                     ThemesStartEvent
+         35  ffff8907ca8c1f20 Event                     HasFacadeAnimations.4560.6196
+             ffffd801f93ec090 Section                   ImeSipSharedMapping
+             ffffd801f93ce510 Section                   11d0HWNDInterface:101d8
+             ffff8907ca8c18e0 Event                     Stop NavigationServer
+             ffff8907ca71b0a0 Mutant                    SM0:4192:304:WilStaging_02
+             ffff8907ca5d15c0 Semaphore                 SM0:2172:304:WilStaging_02_p0
+             ffffd801f8157da0 Section                   windows_shell_global_counters
+         36  ffff8907cad89f20 Mutant                    SM0:2632:304:WilStaging_02
+             ffff8907caad78a0 Event                     {DFFDE213-8CB4-46a9-90EB-3DA843AF66F9}-NoDigitizer
+             ffff8907caad7d00 Event                     {DFFDE213-8CB4-46a9-90EB-3DA843AF66F9}-digitizer
+             ffff8907ca29fae0 Semaphore                 SM0:4560:304:WilStaging_02_p0
+             ffff8907ca71bfa0 Mutant                    SM0:4120:120:WilError_03
+             ffff8907ca5c63a0 Event                     {DFFDE213-8CB4-46a9-90EB-3DA843AF66F9}-request2
+             ffff8907c9abff00 Event                     WinSta0_DesktopSwitch
+
+00a0: Object: ffff8907c836a0b0  GrantedAccess: 00100002 Entry: ffffd801fa8fe280
+Object: ffff8907c836a0b0  Type: (ffff8907c2ab4380) IRTimer
+    ObjectHeader: ffff8907c836a080 (new version)
+        HandleCount: 1  PointerCount: 32769
+
+00a4: Object: ffff8907cb01d6a0  GrantedAccess: 00000001 (Protected) (Inherit) (Audit) Entry: ffffd801fa8fe290
+Object: ffff8907cb01d6a0  Type: (ffff8907c2af8400) WaitCompletionPacket
+    ObjectHeader: ffff8907cb01d670 (new version)
+        HandleCount: 1  PointerCount: 32769
+
+00a8: Object: ffffd801fb0291b0  GrantedAccess: 00000001 Entry: ffffd801fa8fe2a0
+Object: ffffd801fb0291b0  Type: (ffff8907c2af8ae0) Key
+    ObjectHeader: ffffd801fb029180 (new version)
+        HandleCount: 1  PointerCount: 32768
+        Directory Object: 00000000  Name: \REGISTRY\MACHINE\SYSTEM\CONTROLSET001\CONTROL\SESSION MANAGER
+
+00ac: Object: ffff8907c7d3b340  GrantedAccess: 001fffff (Protected) Entry: ffffd801fa8fe2b0
+Object: ffff8907c7d3b340  Type: (ffff8907c2a93220) Process
+    ObjectHeader: ffff8907c7d3b310 (new version)
+        HandleCount: 7  PointerCount: 229259
+
+00b0: Object: ffffd801fafb1ee0  GrantedAccess: 000f0007 (Protected) (Inherit) Entry: ffffd801fa8fe2c0
+Object: ffffd801fafb1ee0  Type: (ffff8907c2af8980) Section
+    ObjectHeader: ffffd801fafb1eb0 (new version)
+        HandleCount: 1  PointerCount: 32690
+
+00b4: Object: ffffd801fb2ad990  GrantedAccess: 00000009 (Inherit) (Audit) Entry: ffffd801fa8fe2d0
+Object: ffffd801fb2ad990  Type: (ffff8907c2af8ae0) Key
+    ObjectHeader: ffffd801fb2ad960 (new version)
+        HandleCount: 1  PointerCount: 32768
+        Directory Object: 00000000  Name: \REGISTRY\MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\IMAGE FILE EXECUTION OPTIONS
+
+00b8: Object: ffff8907cb9f4db0  GrantedAccess: 00120089 Entry: ffffd801fa8fe2e0
+Object: ffff8907cb9f4db0  Type: (ffff8907c2af70c0) File
+    ObjectHeader: ffff8907cb9f4d80 (new version)
+        HandleCount: 1  PointerCount: 32784
+        Directory Object: 00000000  Name: \Temp\evil.dll {HarddiskVolume3}
+
+00bc: Object: ffffd801fb2ab240  GrantedAccess: 00020019 (Protected) Entry: ffffd801fa8fe2f0
+Object: ffffd801fb2ab240  Type: (ffff8907c2af8ae0) Key
+    ObjectHeader: ffffd801fb2ab210 (new version)
+        HandleCount: 1  PointerCount: 32767
+        Directory Object: 00000000  Name: \REGISTRY\MACHINE\SYSTEM\CONTROLSET001\CONTROL\NLS\SORTING\VERSIONS
+
+00c0: Object: ffff8907ca6c20c0  GrantedAccess: 001fffff (Protected) Entry: ffffd801fa8fe300
+Object: ffff8907ca6c20c0  Type: (ffff8907c2ab5f00) Thread
+    ObjectHeader: ffff8907ca6c2090 (new version)
+        HandleCount: 1  PointerCount: 1
+
+00c4: Object: ffff8907ca6d30c0  GrantedAccess: 001fffff (Protected) Entry: ffffd801fa8fe310
+Object: ffff8907ca6d30c0  Type: (ffff8907c2ab5f00) Thread
+    ObjectHeader: ffff8907ca6d3090 (new version)
+        HandleCount: 3  PointerCount: 98302
+
+00c8: Object: ffff8907c437e080  GrantedAccess: 001fffff (Protected) (Audit) Entry: ffffd801fa8fe320
+Object: ffff8907c437e080  Type: (ffff8907c2a93220) Process
+    ObjectHeader: ffff8907c437e050 (new version)
+        HandleCount: 6  PointerCount: 196594
+
+00d4: Object: ffff8907cb6da5d0  GrantedAccess: 00000804 (Inherit) Entry: ffffd801fa8fe350
+Object: ffff8907cb6da5d0  Type: (ffff8907c2c7d220) EtwRegistration
+    ObjectHeader: ffff8907cb6da5a0 (new version)
+        HandleCount: 1  PointerCount: 1
+
+00d8: Object: ffffd801fb2ad660  GrantedAccess: 00000008 (Protected) (Inherit) Entry: ffffd801fa8fe360
+Object: ffffd801fb2ad660  Type: (ffff8907c2af8ae0) Key
+    ObjectHeader: ffffd801fb2ad630 (new version)
+        HandleCount: 1  PointerCount: 32768
+        Directory Object: 00000000  Name: \REGISTRY\USER\S-1-5-21-2855739481-3201411359-558298356-1003\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION
+
+02e8: Object: ffffd801f93bcbd0  GrantedAccess: 00000004 (Inherit) Entry: ffffd801fa8feba0
+Object: ffffd801f93bcbd0  Type: (ffff8907c2af8980) Section
+    ObjectHeader: ffffd801f93bcba0 (new version)
+        HandleCount: 8  PointerCount: 163844
+        Directory Object: ffffd801f81fadc0  Name: C:*ProgramData*Microsoft*Windows*Caches*{6AF0698E-D558-4F6E-9B3C-3716689AF493}.2.ver0x0000000000000001.db
+
+02ec: Object: ffffd801f93bdd10  GrantedAccess: 00000004 (Inherit) (Audit) Entry: ffffd801fa8febb0
+Object: ffffd801f93bdd10  Type: (ffff8907c2af8980) Section
+    ObjectHeader: ffffd801f93bdce0 (new version)
+        HandleCount: 20  PointerCount: 458759
+        Directory Object: ffffd801f81fadc0  Name: C:*ProgramData*Microsoft*Windows*Caches*cversions.2.ro
+
+02f4: Object: ffffd801f93bdd10  GrantedAccess: 00000004 (Inherit) (Audit) Entry: ffffd801fa8febd0
+Object: ffffd801f93bdd10  Type: (ffff8907c2af8980) Section
+    ObjectHeader: ffffd801f93bdce0 (new version)
+        HandleCount: 20  PointerCount: 458759
+        Directory Object: ffffd801f81fadc0  Name: C:*ProgramData*Microsoft*Windows*Caches*cversions.2.ro
+
+02f8: Object: ffffd801f93bbb50  GrantedAccess: 00000004 (Inherit) Entry: ffffd801fa8febe0
+Object: ffffd801f93bbb50  Type: (ffff8907c2af8980) Section
+    ObjectHeader: ffffd801f93bbb20 (new version)
+        HandleCount: 8  PointerCount: 163844
+        Directory Object: ffffd801f81fadc0  Name: C:*ProgramData*Microsoft*Windows*Caches*{DDF571F2-BE98-426D-8288-1A9A39C3FDA2}.2.ver0x0000000000000001.db
+
+0490: Object: ffff8907cb8ec3e0  GrantedAccess: 001f0003 (Protected) (Inherit) Entry: ffffd801faeff240
+Object: ffff8907cb8ec3e0  Type: (ffff8907c2ab4bc0) Event
+    ObjectHeader: ffff8907cb8ec3b0 (new version)
+        HandleCount: 3  PointerCount: 3
+
+05ac: Object: ffffd801faf147d0  GrantedAccess: 000f0007 (Inherit) Entry: ffffd801faeff6b0
+Object: ffffd801faf147d0  Type: (ffff8907c2af8980) Section
+    ObjectHeader: ffffd801faf147a0 (new version)
+        HandleCount: 3  PointerCount: 32771
+        Directory Object: ffffd801f81fadc0  Name: NLS_CodePage_437_3_2_0_0
+
+0858: Object: ffffd801faf02f50  GrantedAccess: 000f0007 (Inherit) Entry: ffffd801fa0a0160
+Object: ffffd801faf02f50  Type: (ffff8907c2af8980) Section
+    ObjectHeader: ffffd801faf02f20 (new version)
+        HandleCount: 3  PointerCount: 32771
+        Directory Object: ffffd801f81fadc0  Name: NLS_CodePage_1252_3_2_0_0
+
+08c8: Object: ffff8907cb9eb490  GrantedAccess: 0012019f (Inherit) (Audit) Entry: ffffd801fa0a0320
+Object: ffff8907cb9eb490  Type: (ffff8907c2af70c0) File
+    ObjectHeader: ffff8907cb9eb460 (new version)
+        HandleCount: 9  PointerCount: 196506
+        Directory Object: 00000000  Name: \Output {ConDrv}
+
+

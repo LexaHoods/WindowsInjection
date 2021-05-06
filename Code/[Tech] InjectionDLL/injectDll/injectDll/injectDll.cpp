@@ -126,6 +126,8 @@ int main(int argc, char *argv[])
 
     CreateRemoteThread(handleProcess, NULL, 0, threatStartRoutineAddress, remoteBuffer, 0, NULL);
 
+    system("pause");
+
     CloseHandle(handleProcess);
 
     fprintf(stderr, "***** Succes, GoodBye ! EvIl *****\n");
