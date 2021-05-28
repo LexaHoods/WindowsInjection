@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <windows.h>
 #include <tchar.h>
@@ -18,6 +18,17 @@ typedef struct _PAYLOADFILE {
 	DWORD  payloadSize;
 	LPVOID lpBuffer;
 } PAYLOADFILE, * PPAYLOADFILE;
+
+typedef struct BASE_RELOCATION_BLOCK {
+	DWORD pageAddress;
+	DWORD blockSize;
+} BASE_RELOCATION_BLOCK, * PBASE_RELOCATION_BLOCK;
+
+typedef struct BASE_RELOCATION_ENTRY {
+	USHORT offset : 12;
+	USHORT type : 4;
+} BASE_RELOCATION_ENTRY, * PBASE_RELOCATION_ENTRY;
+
 
 int _CreateProcess(LPCWSTR targetPath, LPCWSTR sourcePath);
 int ReadPayload(LPCWSTR sourcePath, PPAYLOADFILE pFile);

