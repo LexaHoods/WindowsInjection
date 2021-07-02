@@ -140,7 +140,6 @@
       <Optimization>Disabled</Optimization>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <AdditionalOptions>/NoSxS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

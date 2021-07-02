@@ -1,0 +1,8 @@
+﻿  pch.cpp
+  dllmain.cpp
+     Creating library C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech]InjectionDLL\evil.dll\x64\Release\evil.lib and object C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech]InjectionDLL\evil.dll\x64\Release\evil.exp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 2 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  evil.dll.vcxproj -> C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech]InjectionDLL\evil.dll\x64\Release\evil.dll

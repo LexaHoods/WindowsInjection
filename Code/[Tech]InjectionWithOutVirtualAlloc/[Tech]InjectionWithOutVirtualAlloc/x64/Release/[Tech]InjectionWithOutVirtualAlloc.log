@@ -1,0 +1,11 @@
+﻿  [Tech]InjectionWithOutVirtualAlloc.cpp
+C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech]InjectionWithOutVirtualAlloc\[Tech]InjectionWithOutVirtualAlloc\[Tech]InjectionWithOutVirtualAlloc.cpp(155,21): warning C4477: 'fprintf' : la chaîne de format '%p' nécessite un argument de type 'void *', mais l'argument variadique 1 est de type 'DWORD'
+C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech]InjectionWithOutVirtualAlloc\[Tech]InjectionWithOutVirtualAlloc\[Tech]InjectionWithOutVirtualAlloc.cpp(155,21): warning C4313: 'fprintf' : conflit entre '%p' dans la chaîne de format et l'argument 1 de type 'DWORD'
+C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech]InjectionWithOutVirtualAlloc\[Tech]InjectionWithOutVirtualAlloc\[Tech]InjectionWithOutVirtualAlloc.cpp(161,21): warning C4477: 'fprintf' : la chaîne de format '%x' nécessite un argument de type 'unsigned int', mais l'argument variadique 1 est de type 'LPVOID'
+C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech]InjectionWithOutVirtualAlloc\[Tech]InjectionWithOutVirtualAlloc\[Tech]InjectionWithOutVirtualAlloc.cpp(161,21): warning C4313: 'fprintf' : conflit entre '%x' dans la chaîne de format et l'argument 1 de type 'LPVOID'
+  Génération de code en cours
+  1 of 4 functions (25.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Fin de la génération du code
+  [Tech]InjectionWithOutVirtualAlloc.vcxproj -> C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech]InjectionWithOutVirtualAlloc\x64\Release\[Tech]InjectionWithOutVirtualAlloc.exe

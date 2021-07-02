@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech]InjectionDLL\injectDll\x64\Release\injectDll.exe</FullPath>
+      <FullPath>C:\Users\ANSSI\Desktop\WindowsInjection\Code\ShellCode\x64\Release\ShellCode.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
