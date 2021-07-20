@@ -1,0 +1,6 @@
+﻿cl : command line warning D9025: overriding '/sdl' with '/GS-'
+  reflectiveDLL.cpp
+C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech]ReflectiveDLL\[Tech]ReflectiveDLL\reflectiveDLL.cpp(19,18): warning C4477: 'fprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'const std::string'
+C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech]ReflectiveDLL\[Tech]ReflectiveDLL\reflectiveDLL.cpp(66,19): warning C4244: '+=': conversion from 'DWORD64' to 'DWORD', possible loss of data
+  LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
+  [Tech]ReflectiveDLL.vcxproj -> C:\Users\ANSSI\Desktop\WindowsInjection\Code\[Tech]ReflectiveDLL\x64\Release\[Tech]ReflectiveDLL.exe

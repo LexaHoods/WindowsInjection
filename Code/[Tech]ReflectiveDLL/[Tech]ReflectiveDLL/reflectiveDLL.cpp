@@ -311,7 +311,7 @@ int main(int argc, char* argv[])
 	if (!hThread)
 		EXIT_WITH_ERROR("/!/ Can't create remote thread !")
 
-	if(WaitForSingleObject(hThread, 500) == 0x00000102L)
+	if(WaitForSingleObject(hThread, 1000) == 0x00000102L)
 		EXIT_WITH_ERROR("The thread did'nt run in time !");
 
 	if (!VirtualProtectEx(hProcess, (LPVOID)loaderMem, 4096, PAGE_NOACCESS, &oldPerms1))

