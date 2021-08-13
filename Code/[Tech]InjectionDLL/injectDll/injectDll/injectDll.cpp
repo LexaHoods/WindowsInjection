@@ -128,6 +128,8 @@ int main(int argc, char *argv[])
     /* STEP 2 : Allocation virtual memory in the target */
 
     remoteBuffer = VirtualAllocEx(handleProcess, NULL, sizeof dllPath, MEM_COMMIT, PAGE_READONLY);
+
+    fprintf(stderr, " RemoteBuffer at %p \n", remoteBuffer);
    
     if (!remoteBuffer)
         EXIT_WITH_ERROR("Error remoteBuffer !");

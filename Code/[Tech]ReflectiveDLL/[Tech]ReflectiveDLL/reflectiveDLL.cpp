@@ -252,6 +252,7 @@ int main(int argc, char* argv[])
 	DWORD oldPerms1, oldPerms2; 
 
 	/* STEP 3 : Inject sections and header of the DLL && inject loader payload */
+	system("pause");
 
 	fprintf(stderr, "*** Step 3 : Write payload in execImage *** \n");
 
@@ -294,12 +295,15 @@ int main(int argc, char* argv[])
 	// Write the loader code to target process
 	WriteProcessMemory(hProcess, (PVOID)((loaderData*)loaderMem + 1), manualLoader, (DWORD64)stub - (DWORD64)manualLoader, NULL);
 	
-
+	system("pause");
+	
 	/* STEP 6 : Create a remote thread to execute the manual loader */
 	fprintf(stderr, "*** Step 4 : Creation of a remote thread *** \n");
 	
 	fprintf(stderr, "*** Change permission of exeImage and loadermem : RW --> RWX *** \n");
-
+	
+	system("pause");
+	
 	if (!VirtualProtectEx(hProcess, (LPVOID)loaderMem, 4096, PAGE_EXECUTE_READWRITE, &oldPerms1))
 		fprintf(stderr, "/!/ Error in VirtualProtect #1 \n");
 
@@ -311,8 +315,16 @@ int main(int argc, char* argv[])
 	if (!hThread)
 		EXIT_WITH_ERROR("/!/ Can't create remote thread !")
 
+	fprintf(stderr, "*** Execution of thread ... ***\n");
+
 	if(WaitForSingleObject(hThread, 1000) == 0x00000102L)
 		EXIT_WITH_ERROR("The thread did'nt run in time !");
+
+	system("pause");
+
+	fprintf(stderr, "*** Change permission of exeImage and loadermem : RWX --> NA *** \n");
+	
+	system("pause");
 
 	if (!VirtualProtectEx(hProcess, (LPVOID)loaderMem, 4096, PAGE_NOACCESS, &oldPerms1))
 		fprintf(stderr, "Error in VirtualProtect #3 \n");

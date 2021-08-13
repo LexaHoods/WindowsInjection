@@ -226,7 +226,6 @@ int UnMapAndInject(LPPROCESS_INFORMATION pPi, PVOID buffer, DWORD sizeBuffer)
 
 	system("pause");
 
-	//TODO : Resume thread bug with some programs in payload (crash of app), because 64bit ?  Works with cmd.exe in payload ! 
 
 	ResumeThread(pPi->hThread);
 
