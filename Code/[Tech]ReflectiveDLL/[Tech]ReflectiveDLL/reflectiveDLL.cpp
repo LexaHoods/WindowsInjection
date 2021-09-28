@@ -317,8 +317,7 @@ int main(int argc, char* argv[])
 
 	fprintf(stderr, "*** Execution of thread ... ***\n");
 
-	if(WaitForSingleObject(hThread, 1000) == 0x00000102L)
-		EXIT_WITH_ERROR("The thread did'nt run in time !");
+	WaitForSingleObject(hThread, 1000);
 
 	system("pause");
 

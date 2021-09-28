@@ -137,7 +137,7 @@ int main(int argc, char *argv[])
    /* STEP 3 : Write DLL path to allocated memory & Get address of LoadLibrary */
     DWORD oldProtection;
 
-    VirtualProtectEx(handleProcess, remoteBuffer, sizeof dllPath, PAGE_EXECUTE_READWRITE, &oldProtection);
+    VirtualProtectEx(handleProcess, remoteBuffer, sizeof dllPath, PAGE_READWRITE, &oldProtection);
 
 
     WriteProcessMemory(handleProcess, remoteBuffer, (LPVOID)dllPath, sizeof dllPath, NULL);
